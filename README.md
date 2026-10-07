@@ -31,8 +31,11 @@ set up first, because every service depends on it.
 ```
                          Internet
                              │
+                  (mobile carrier's CGNAT, probably)
+                             │  5G/4G radio link
                     ┌────────┴────────┐
-                    │  Router / NAT   │  ← DHCP hands out IPs and the DNS server address
+                    │ Brovi H158-381  │  ← 5G router: NAT, Wi-Fi, and DHCP (hands out
+                    │ 192.168.8.1     │    IPs and the DNS server address)
                     └────────┬────────┘
                              │  home LAN (Ethernet)
          ┌───────────────────┼────────────────────────┐
@@ -64,8 +67,16 @@ Each sub-project README has its own, more detailed flow diagram.
 **Software / network environment** (fill in as decided):
 
 - OS: _TBD_
-- Network edge (ISP router model, own router or not): _TBD_
-- Public IPv4 or CGNAT: _TBD_ (decides how sub-project 2 can be reached from outside)
+- Network edge: **Brovi H158-381**, a 5G/4G cellular router (SIM-based, Huawei-family
+  hardware). No separate router behind it. Factory LAN defaults: router at
+  `192.168.8.1`, subnet `192.168.8.0/24`.
+- Public IPv4 or CGNAT: **probably CGNAT** (the norm for cellular broadband), not yet
+  verified. To check, compare the WAN IP on the router's admin page with the output
+  of `curl -4 ifconfig.me`; if they differ, or the WAN IP is in `100.64.0.0/10`,
+  it's CGNAT. If so, sub-project 2 is reached through a tunnel (or IPv6) instead of
+  port forwarding.
+- Router admin credentials, Wi-Fi name/password, IMEI, serial number: **never in
+  this repo**. They're on the router's label and in my password manager.
 
 Personal network details (IP ranges, hostnames, domain) live in gitignored
 files. See [Secrets](#secrets-and-personal-details).
@@ -76,15 +87,15 @@ files. See [Secrets](#secrets-and-personal-details).
 
 ```
 .
-├── README.md            ← you are here: overview, hardware, conventions
-├── .gitignore           ← keeps secrets and personal details out of git
+├── README.md          ← you are here: overview, hardware, conventions
+├── .gitignore         ← keeps secrets and personal details out of git
 ├── docs/
-│   ├── NOTES.md         ← concepts learned, written in my own words
-│   └── rebuild.md       ← fresh-install-to-working-server checklist
-├── base/                ← OS install, SSH, static IP, updates, firewall
-├── pihole/              ← sub-project 1
-├── personal_website/    ← sub-project 2
-└── media_suite/         ← sub-project 3
+│   ├── NOTES.md       ← concepts learned, written in my own words
+│   └── rebuild.md     ← fresh-install-to-working-server checklist
+├── base/              ← OS install, SSH, static IP, updates, firewall
+├── pihole/            ← sub-project 1
+├── website/           ← sub-project 2
+└── media/             ← sub-project 3
 ```
 
 **Why one repo instead of several:** the three services share one machine, one
@@ -138,4 +149,3 @@ Every sub-project folder has its own `README.md` with the same sections:
 - Raspberry Pi documentation: https://www.raspberrypi.com/documentation/
 - Pi-hole documentation: https://docs.pi-hole.net/
 - Man pages on the Pi itself: `man <command>`, `man 5 <config-file>` for file formats
-
