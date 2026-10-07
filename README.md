@@ -1,4 +1,4 @@
-# Raspberry Pi Home Server — A Learning Lab
+# Raspberry Pi Home Server
 
 A Raspberry Pi 4 running three self-hosted services, built as a way to learn
 networking (IP, DNS, HTTP/TLS), how the internet works end to end, and Linux
