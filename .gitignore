@@ -1,0 +1,22 @@
+# Secrets and personal network details never go in git. For every ignored file
+# below there is a committed `.example` template showing its structure.
+
+# Real per-machine settings (hostname, username, timezone, ...)
+*.env
+!*.env.example
+
+# cloud-init files written onto the SD card contain a password hash and an SSH
+# public key. The committed template is base/user-data.example.
+user-data
+meta-data
+network-config
+
+# Backups made by the card-patching scripts may contain the real user-data.
+backup-*/
+pi-card-backup-*/
+
+# Private keys, just in case something is copied into the repo by mistake.
+id_*
+!id_*.pub.example
+*.pem
+*.key

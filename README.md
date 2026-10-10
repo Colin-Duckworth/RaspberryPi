@@ -66,7 +66,9 @@ Each sub-project README has its own, more detailed flow diagram.
 
 **Software / network environment** (fill in as decided):
 
-- OS: _TBD_
+- OS: **Raspberry Pi OS Lite (64-bit)**, Debian-based, headless. First-boot
+  configuration (hostname, user, SSH key) is applied by cloud-init from the SD
+  card's `bootfs` partition. See [`base/README.md`](base/README.md).
 - Network edge: **Brovi H158-381**, a 5G/4G cellular router (SIM-based, Huawei-family
   hardware). No separate router behind it. Factory LAN defaults: router at
   `192.168.8.1`, subnet `192.168.8.0/24`.
@@ -133,6 +135,16 @@ Every sub-project folder has its own `README.md` with the same sections:
 - Small, focused commits, one logical change each.
 - Commit messages say what changed and why, e.g. `pihole: set upstream to Quad9 for DNSSEC support`.
 - Experiments go on branches (`git switch -c experiment/unbound`) and merge back only once understood.
+
+---
+
+## Current status
+
+- **base/**: OS flashed, first-boot config applied, key-only SSH works.
+  Still to do: updates, fixed IP, firewall. The snags from the first build
+  (WSL2 + Imager, cloud-init's once-per-instance rule) are written up in
+  [`base/README.md`](base/README.md#5-failure-modes-and-troubleshooting).
+- **pihole/, website, media**: not started.
 
 ---
 
