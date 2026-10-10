@@ -17,8 +17,8 @@ install, the docs and configs here should be enough to rebuild the whole server.
 | # | Sub-project | What it does | What I'm learning | Status |
 |---|---|---|---|---|
 | 1 | [`pihole/`](pihole/) | Network-wide ad blocking at the DNS layer | DNS resolution end to end, recursive vs. authoritative servers, caching/TTLs, DHCP, limits of DNS blocking (DoH, hardcoded DNS) | In progress: installed, one device filtered |
-| 2 | [`website/`](website/) | A personal website, self-hosted on the Pi | Web servers, reverse proxies, ports/sockets, HTTP/HTTPS, TLS certificates, DNS records, NAT/port forwarding vs. tunnels, dynamic IPs, internet exposure | Not started |
-| 3 | [`media/`](media/) | Local web UI to browse and play movies and games stored on the Pi | Service discovery on the LAN, storage and permissions, streaming vs. transcoding, the Pi's hardware limits, browser playback and emulation | Not started |
+| 2 | [`personal_website/`](personal_website/) | A personal website, self-hosted on the Pi | Web servers, reverse proxies, ports/sockets, HTTP/HTTPS, TLS certificates, DNS records, NAT/port forwarding vs. tunnels, dynamic IPs, internet exposure | In progress: placeholder served on the LAN |
+| 3 | [`media_suite/`](media_suite/) | Local web UI to browse and play movies and games stored on the Pi | Service discovery on the LAN, storage and permissions, streaming vs. transcoding, the Pi's hardware limits, browser playback and emulation | Not started |
 
 All three sit on top of a shared foundation in [`base/`](base/): OS install,
 SSH, a fixed IP address, updates, users/permissions, and the firewall. That's
@@ -96,8 +96,8 @@ files. See [Secrets](#secrets-and-personal-details).
 │   └── rebuild.md     ← fresh-install-to-working-server checklist
 ├── base/              ← OS install, SSH, static IP, updates, firewall
 ├── pihole/            ← sub-project 1
-├── website/           ← sub-project 2
-└── media/             ← sub-project 3
+├── personal_website/  ← sub-project 2
+└── media_suite/       ← sub-project 3
 ```
 
 **Why one repo instead of several:** the three services share one machine, one
@@ -149,7 +149,11 @@ Every sub-project folder has its own `README.md` with the same sections:
   network-wide filtering is blocked by the router, which cannot override DNS for
   its SIM connection. Pi-hole as DHCP server is the remaining option, deferred.
   Details, snags and the router findings are in [`pihole/README.md`](pihole/README.md).
-- **website, media**: not started.
+- **personal_website/**: nginx serves a placeholder page on the LAN, deployed
+  from the repo with `rsync`. Pi-hole's admin UI moved to `:8080` to free ports
+  80/443. Not reachable from outside the LAN yet; the CGNAT check and the access
+  decision are next. See [`personal_website/README.md`](personal_website/README.md).
+- **media_suite/**: not started (needs the USB drive).
 
 ---
 
@@ -157,7 +161,7 @@ Every sub-project folder has its own `README.md` with the same sections:
 
 1. Read [`docs/rebuild.md`](docs/rebuild.md) for the full build order.
 2. Set up [`base/`](base/) first: OS, SSH, fixed IP, firewall.
-3. Then the sub-projects in order: `pihole/` → `website/` → `media/`.
+3. Then the sub-projects in order: `pihole/` → `personal_website/` → `media_suite/`.
 
 ---
 

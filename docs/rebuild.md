@@ -39,10 +39,12 @@ Details and troubleshooting: [`pihole/README.md`](../pihole/README.md).
 
 Prerequisite: a fixed address and the firewall (step 1).
 
-- [ ] Firewall rules for 53 / 80 / 443 from the LAN (and 53 from the LAN's IPv6 ULA prefix)
+- [ ] Firewall rules for 53 and the admin UI ports 8080 / 8443 from the LAN (and 53 from the LAN's IPv6 ULA prefix). 80/443 are left for the website.
 - [ ] Download the installer, read it, run it: Quad9 (filtered, DNSSEC), default blocklist, query logging on, decline any "open firewall ports" offer
 - [ ] `sudo pihole setpassword` (replace the generated password; keep it out of the repo)
   - Verify: `nslookup example.com <pi-ip>` resolves and `nslookup doubleclick.net <pi-ip>` returns `0.0.0.0`
+- [ ] Move the admin UI off 80/443: `sudo pihole-FTL --config webserver.port '8080o,[::]:8080o,8443os,[::]:8443os'` (so the website can bind 80/443)
+  - Verify: `sudo ss -tlpn | grep -E ':(80|443)\b'` prints nothing; `http://<pi-ip>:8080/admin` loads
 - [ ] One client: set **both** IPv4 and IPv6 DNS by hand to the Pi (ULA address for IPv6)
   - Verify (from that client): `Resolve-DnsName <name-not-looked-up-before> -DnsOnly` returns `0.0.0.0`
 - [ ] Browser "Secure DNS" off, or the browser's lookups will not show in the query log
@@ -50,8 +52,18 @@ Prerequisite: a fixed address and the firewall (step 1).
 
 ## 3. personal_website/
 
-Not started. Prerequisite: check whether the connection is behind CGNAT, which
-decides between port forwarding and a tunnel.
+Details and troubleshooting: [`personal_website/README.md`](../personal_website/README.md).
+
+Prerequisite: Pi-hole's admin UI is off 80/443 (step 2).
+
+- [ ] Firewall: port 80 from the LAN
+- [ ] `sudo apt install -y nginx`; create `/var/www/personal_website` owned by the login user
+  - Verify: `curl -sI http://localhost/` on the Pi returns `200 OK`
+- [ ] Install `personal_website/nginx/personal_website.conf`, enable it, **remove the `default` site**, `sudo nginx -t`, reload
+  - Verify: `nginx -t` is successful; `ss -tlpn | grep ':80\b'` shows nginx
+- [ ] `base/pi.env` has `PI_USER` and `PI_ADDRESS`; run `personal_website/scripts/deploy.sh`
+  - Verify: the page loads in a browser on the LAN, and on a second device
+- [ ] Not yet: CGNAT check, public access decision, TLS (see "Deferred" in the sub-project README)
 
 ## 4. media_suite/
 

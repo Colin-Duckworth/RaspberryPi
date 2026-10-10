@@ -25,7 +25,7 @@ forwarded to an upstream resolver and cached.
 | Upstream | Quad9 (filtered, DNSSEC): `9.9.9.9`, `149.112.112.112` |
 | Blocklist | StevenBlack unified hosts, ~72.5k domains |
 | Query log | On, privacy level 0 ("show everything"): my own network, and per-domain visibility is the point |
-| Admin UI | `http://<pi-ip>/admin` |
+| Admin UI | `http://<pi-ip>:8080/admin`: moved off 80/443 so the website can have the default web ports (see [3.4](#34-move-the-admin-ui-off-ports-80443)) |
 
 Why native, not Docker: the goal is understanding, and Docker adds a layer
 (networking modes, volumes) between me and the thing I am trying to learn. Pi-hole
@@ -78,8 +78,8 @@ its address must not change.
 
 ```bash
 sudo ufw allow from <lan-cidr> to any port 53  comment 'DNS (tcp+udp) from LAN'
-sudo ufw allow from <lan-cidr> to any port 80  proto tcp comment 'Pi-hole admin UI'
-sudo ufw allow from <lan-cidr> to any port 443 proto tcp comment 'Pi-hole admin UI (TLS)'
+sudo ufw allow from <lan-cidr> to any port 8080 proto tcp comment 'Pi-hole admin UI'
+sudo ufw allow from <lan-cidr> to any port 8443 proto tcp comment 'Pi-hole admin UI (TLS)'
 # IPv4 sources do not match IPv6 traffic. Needed for clients using the IPv6 server:
 sudo ufw allow from <lan-ula-cidr> to any port 53 comment 'DNS (v6 ULA) from LAN'
 ```
@@ -132,6 +132,27 @@ bypassing Pi-hole (snag 2). Use the private (ULA) IPv6 address, not a public
 Other devices: same idea in their Wi-Fi settings, one by one, until a
 network-wide option exists.
 
+### 3.4 Move the admin UI off ports 80/443
+
+Only one program can listen on a given port. The installer puts the admin UI on
+80/443, which are the ports browsers assume, so they are what the website
+([`personal_website/`](../personal_website/)) should have. The admin UI is only
+for me, so it takes the odd ones. Do this with the 8080/8443 firewall rules from
+3.1 already in place, so the page stays reachable.
+
+```bash
+sudo pihole-FTL --config webserver.port    # before: 80o,443os,[::]:80o,[::]:443os
+sudo pihole-FTL --config webserver.port '8080o,[::]:8080o,8443os,[::]:8443os'
+sudo systemctl restart pihole-FTL          # DNS drops for a couple of seconds
+```
+
+The value is a list of listeners: a port, optionally prefixed with an address
+(`[::]` is all IPv6), and suffixed with `o` (optional: do not fail if that address
+family is unavailable) and `s` (TLS). FTL re-bound its web server in place when
+the setting changed (same process ID), and DNS kept answering.
+
+Undo: set the value back to the "before" string above and restart.
+
 ---
 
 ## 4. How to verify
@@ -144,7 +165,8 @@ network-wide option exists.
 | Blocks | `nslookup doubleclick.net <pi-ip>` | `0.0.0.0` (and `::`) |
 | Cache | the same query twice, a few seconds apart | TTL decreasing |
 | DNSSEC upstream | `nslookup dnssec-failed.org <pi-ip>` | `SERVFAIL` |
-| Web UI up | `curl -s -o /dev/null -w '%{http_code}\n' http://<pi-ip>/admin/` | `302` (redirect to login) |
+| Web UI up | `curl -s -o /dev/null -w '%{http_code}\n' http://<pi-ip>:8080/admin/` | `302` (redirect to login) |
+| Web ports free | `sudo ss -tlpn \| grep -E ':(80\|443)\b'` (Pi) | no output until the website's server starts |
 | Service | `systemctl is-active pihole-FTL` (Pi) | `active` |
 | **The client really uses it** (laptop, PowerShell) | `Resolve-DnsName <fresh-blocked-name> -Type A -DnsOnly` | `0.0.0.0` |
 | Which DNS is the client using | `ipconfig /all` | only the Pi's IPv4 and IPv6 |
@@ -242,6 +264,8 @@ Pi-hole DHCP disabled → cutover (router DHCP off, Pi-hole DHCP on, back to bac
 - [x] Admin password changed from the generated one
 - [x] Blocking, caching, and DNSSEC behaviour verified directly against the Pi
 - [x] One client (laptop) filtered, IPv4 and IPv6, verified through the OS resolver
+- [x] Admin UI moved to 8080/8443; `ss` shows FTL there and nothing on 80/443; DNS still resolves
+- [ ] Admin UI loads at `:8080/admin` in a browser, and the port setting survives `systemctl restart pihole-FTL`
 - [x] Router limits investigated and written up
 - [ ] Browser "Secure DNS" checked on the laptop's browsers
 - [ ] Other devices (phone, TV): per-device DNS, or wait for the DHCP experiment
