@@ -26,14 +26,27 @@ Details and troubleshooting: [`base/README.md`](../base/README.md).
 - [ ] `sudo apt update && sudo apt full-upgrade -y && sudo reboot`
   - Verify: `apt list --upgradable` is empty after reconnecting
 - [ ] Confirm key-only SSH: `sudo sshd -T | grep passwordauthentication` → `no`
-- [ ] Fixed IP (decision pending, see `base/README.md`)
+  - Verify from the laptop: a password-only attempt fails with `Permission denied (publickey)`
+- [ ] Fixed address: DHCP reservation on the router (IP ↔ the Pi's MAC)
   - Verify: reboot the Pi, same address comes back
-- [ ] Firewall: allow SSH first, then enable
-  - Verify: a second SSH session still connects after enabling
+- [ ] Router config backup (System → Backup & Restore), before changing anything else on the router
+- [ ] Firewall (`ufw`): default deny in, LAN-only allows, **SSH rule before `enable`**
+  - Verify: a second SSH session still connects after enabling; `sudo ufw status verbose`
 
 ## 2. pihole/
 
-Not started. Prerequisite: a fixed IP for the Pi (step 1).
+Details and troubleshooting: [`pihole/README.md`](../pihole/README.md).
+
+Prerequisite: a fixed address and the firewall (step 1).
+
+- [ ] Firewall rules for 53 / 80 / 443 from the LAN (and 53 from the LAN's IPv6 ULA prefix)
+- [ ] Download the installer, read it, run it: Quad9 (filtered, DNSSEC), default blocklist, query logging on, decline any "open firewall ports" offer
+- [ ] `sudo pihole setpassword` (replace the generated password; keep it out of the repo)
+  - Verify: `nslookup example.com <pi-ip>` resolves and `nslookup doubleclick.net <pi-ip>` returns `0.0.0.0`
+- [ ] One client: set **both** IPv4 and IPv6 DNS by hand to the Pi (ULA address for IPv6)
+  - Verify (from that client): `Resolve-DnsName <name-not-looked-up-before> -DnsOnly` returns `0.0.0.0`
+- [ ] Browser "Secure DNS" off, or the browser's lookups will not show in the query log
+- [ ] Network-wide coverage: **not possible with this router's DNS settings**; see "Deferred" in `pihole/README.md`
 
 ## 3. personal_website/
 

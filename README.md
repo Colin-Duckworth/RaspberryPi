@@ -16,7 +16,7 @@ install, the docs and configs here should be enough to rebuild the whole server.
 
 | # | Sub-project | What it does | What I'm learning | Status |
 |---|---|---|---|---|
-| 1 | [`pihole/`](pihole/) | Network-wide ad blocking at the DNS layer | DNS resolution end to end, recursive vs. authoritative servers, caching/TTLs, DHCP, limits of DNS blocking (DoH, hardcoded DNS) | Not started |
+| 1 | [`pihole/`](pihole/) | Network-wide ad blocking at the DNS layer | DNS resolution end to end, recursive vs. authoritative servers, caching/TTLs, DHCP, limits of DNS blocking (DoH, hardcoded DNS) | In progress: installed, one device filtered |
 | 2 | [`website/`](website/) | A personal website, self-hosted on the Pi | Web servers, reverse proxies, ports/sockets, HTTP/HTTPS, TLS certificates, DNS records, NAT/port forwarding vs. tunnels, dynamic IPs, internet exposure | Not started |
 | 3 | [`media/`](media/) | Local web UI to browse and play movies and games stored on the Pi | Service discovery on the LAN, storage and permissions, streaming vs. transcoding, the Pi's hardware limits, browser playback and emulation | Not started |
 
@@ -140,11 +140,16 @@ Every sub-project folder has its own `README.md` with the same sections:
 
 ## Current status
 
-- **base/**: OS flashed, first-boot config applied, key-only SSH works.
-  Still to do: updates, fixed IP, firewall. The snags from the first build
-  (WSL2 + Imager, cloud-init's once-per-instance rule) are written up in
+- **base/**: done apart from a router config backup and a CGNAT check. OS
+  flashed and updated, key-only SSH, address pinned by a router DHCP reservation,
+  `ufw` firewall active (LAN-only). The snags from the first build (WSL2 +
+  Imager, cloud-init's once-per-instance rule) are written up in
   [`base/README.md`](base/README.md#5-failure-modes-and-troubleshooting).
-- **pihole/, website, media**: not started.
+- **pihole/**: installed and verified. **One device (the laptop) is filtered**;
+  network-wide filtering is blocked by the router, which cannot override DNS for
+  its SIM connection. Pi-hole as DHCP server is the remaining option, deferred.
+  Details, snags and the router findings are in [`pihole/README.md`](pihole/README.md).
+- **website, media**: not started.
 
 ---
 

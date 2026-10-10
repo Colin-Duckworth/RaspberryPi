@@ -3,8 +3,9 @@
 Shared foundation for all three sub-projects. Nothing else is built until this
 works.
 
-**Status:** OS flashed and first-boot configuration applied; key-only SSH login
-works. Updates, fixed IP, and firewall are still to do (see [Status](#status)).
+**Status:** OS flashed and updated, key-only SSH works, address pinned by a
+router DHCP reservation, firewall active (LAN-only). Remaining items are in
+[Status](#status).
 
 Personal details (username, hostname, the Pi's IP and MAC) are not in this repo.
 Below they are written as `<pi-user>`, `<pi-hostname>` and `<pi-ip>`; the real
@@ -154,6 +155,56 @@ sudo apt update && sudo apt full-upgrade -y
 sudo reboot
 ```
 
+### 3.6 Fixed address: router DHCP reservation
+
+Chosen over a static address on the Pi because the router stays the single
+source of truth for who has which address, and the Pi's network config stays
+"just DHCP". In the router's DHCP page, add a row to the *IP and MAC Address
+Binding List*: the Pi's current IP and its MAC (`ip link show eth0` on the Pi).
+Reboot the Pi and confirm the same address comes back.
+
+Limit: this only works while the router's DHCP server is the one answering. If
+Pi-hole ever takes over DHCP (see `pihole/README.md`, "Deferred"), the Pi needs a
+real static address on itself first.
+
+### 3.7 Firewall (`ufw`)
+
+`ufw` is a thin, readable front end over nftables. It is not installed by
+default on Pi OS Lite. Default stance: nothing in unless allowed, everything
+out. Every allow rule is restricted to the home LAN, so none of these services is
+reachable from outside it.
+
+```bash
+sudo apt install -y ufw
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+
+# Rules go in BEFORE enabling, so SSH is never cut off.
+sudo ufw allow from <lan-cidr> to any port 22 proto tcp comment 'SSH from LAN'
+# (Pi-hole rules, see pihole/README.md)
+sudo ufw allow from <lan-cidr> to any port 53  comment 'DNS (tcp+udp) from LAN'
+sudo ufw allow from <lan-cidr> to any port 80  proto tcp comment 'Pi-hole admin UI'
+sudo ufw allow from <lan-cidr> to any port 443 proto tcp comment 'Pi-hole admin UI (TLS)'
+sudo ufw allow from <lan-ula-cidr> to any port 53 comment 'DNS (v6 ULA) from LAN'
+
+sudo ufw show added        # review BEFORE enabling
+sudo ufw enable            # answer y; the open session survives
+sudo ufw status verbose
+```
+
+Then, **from a second terminal**, prove SSH still works before closing the first.
+`sudo ufw disable` is the instant undo.
+
+Things worth knowing:
+
+- **Blocked means dropped, not refused.** A closed port simply times out instead
+  of answering "connection refused". That is `deny`'s behaviour, and it tells a
+  scanner nothing.
+- **A rule with an IPv4 source does not cover IPv6.** `from 192.168.x.0/24`
+  matches only IPv4, so IPv6 traffic needs its own rule (the `<lan-ula-cidr>` line).
+- **A DHCP request has source `0.0.0.0`**, so a LAN-sourced rule will not match
+  it. This matters only if the Pi ever serves DHCP.
+
 ---
 
 ## 4. How to verify
@@ -166,6 +217,10 @@ sudo reboot
 | Time zone | `timedatectl` | correct zone, "System clock synchronized: yes" |
 | Disk grew | `df -h /` | root fs ≈ card size, not ≈ 2.4 GB |
 | SSH key-only | `sudo sshd -T \| grep -E 'passwordauthentication\|pubkeyauthentication'` | `passwordauthentication no`, `pubkeyauthentication yes` |
+| SSH key-only, from outside | `ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no <pi-user>@<pi-ip>` (laptop) | `Permission denied (publickey)`: the server does not even offer passwords |
+| Firewall active | `sudo ufw status verbose` | `active`, `deny (incoming)`, only LAN-sourced allows |
+| Firewall drops the rest | `timeout 3 bash -c 'echo > /dev/tcp/<pi-ip>/8080'` (laptop) | hangs until the timeout (dropped), not an instant refusal |
+| Address is pinned | reboot the Pi, then `ip -br a` | same address as before |
 | Network view | `ip -br a`, `ip route`, `ip neigh` | eth0 has the LAN IP; default route via the router |
 | cloud-init ran | `cloud-init status --long` | `status: done` |
 | Updates applied | `apt list --upgradable` | empty |
@@ -209,8 +264,15 @@ sudo umount /mnt/bootfs /mnt/rootfs
 - **"The authenticity of host ... can't be established"** on the first SSH: new
   host keys were generated on first boot. Expected once; after a reflash you will
   get *REMOTE HOST IDENTIFICATION HAS CHANGED* and need `ssh-keygen -R <pi-ip>`.
-- **The Pi's IP changes between boots:** it comes from DHCP. Fix with a fixed IP
-  (below), which Pi-hole needs anyway.
+- **The Pi's IP changes between boots:** it comes from DHCP. Fixed by the router
+  reservation (3.6); Pi-hole needs a stable address.
+- **The Pi's public IPv6 address changes:** the carrier rotates the IPv6 prefix
+  (seen within hours of the first boot: the old `2001:…` address became
+  *deprecated* and a new one appeared). Never use a public IPv6 address as a DNS
+  server or in a firewall rule. The router's private ULA prefix (`fd..::/64`) has
+  been stable so far and is what the LAN-only IPv6 rules use.
+- **Tests run from WSL appear to come from the laptop's address:** WSL2 is NAT'd
+  by Windows, so the Pi (and Pi-hole's log) cannot tell WSL from Windows.
 
 ### Lock-out precautions (before touching the firewall or sshd)
 
@@ -227,13 +289,14 @@ testing changes from a second.
 - [x] First-boot config applied: hostname, admin user, SSH key, time zone
 - [x] Key-only SSH login from the laptop works
 - [x] Card-patching scripts in `scripts/`, with git-ignored `pi.env`
-- [ ] `apt full-upgrade` and reboot
-- [ ] Verify `sshd` is key-only (`sshd -T`)
-- [ ] Fixed IP: router DHCP reservation vs. static config on the Pi (decide; document why)
-- [ ] Firewall (`ufw` or nftables): allow SSH first
+- [x] `apt full-upgrade` and reboot (0 upgradable afterwards)
+- [x] `sshd` is key-only (password attempt refused with `Permission denied (publickey)`)
+- [x] Fixed address: router DHCP reservation (decided, see 3.6)
+- [x] Firewall: `ufw` active, default deny in, LAN-only allows for 22/53/80/443
+- [ ] Router config backup (System → Backup & Restore). Not confirmed done.
 - [ ] Check CGNAT (compare router WAN IP with `curl -4 ifconfig.me`) for sub-project 2
+- [ ] `sudo sshd -T` confirmation on the Pi itself (the outside-in test passed, but
+      the effective config has not been printed)
 
-**Decision pending:** fixed IP. A DHCP reservation on the router is simplest and
-keeps the router as the single source of truth; a static address on the Pi is
-more instructive but must sit outside the router's DHCP pool. Pi-hole will make
-this address the network's DNS server, so it must not change.
+**Decision made:** fixed IP via router reservation. Revisit only if Pi-hole takes
+over DHCP, which would need a static address on the Pi itself first.
