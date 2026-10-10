@@ -34,4 +34,5 @@ Purpose: The reasoning here is to just explain the concepts of what I learned to
 		1. I go to someone's house and log in to their wifi
 		2. DHCP automatically assigns my device an IP address and tells my device the IP address of the DNS and the default gateway
 		3. I search google.com on my device
-		4. My device uses the DHCP provided DNS IP address to resolve google.com to an IP address for my device to communicate with.
+		4. My device uses the DHCP provided DNS IP address to resolve google.com to an IP address for my device to communicate with and sends to the DHCP designated
+		   gateway IP address.
