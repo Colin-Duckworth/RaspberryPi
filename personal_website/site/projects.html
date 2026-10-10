@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Projects | [[FULL NAME]]</title>
+  <meta name="description" content="Projects by [[FULL NAME]]: [[ONE SENTENCE ON THE KINDS OF WORK SHOWN HERE]]">
+  <link rel="canonical" href="https://[[DOMAIN]]/projects.html">
+  <meta name="theme-color" content="#ffffff">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Projects | [[FULL NAME]]">
+  <meta property="og:description" content="[[ONE SENTENCE ON THE KINDS OF WORK SHOWN HERE]]">
+  <meta property="og:url" content="https://[[DOMAIN]]/projects.html">
+  <meta property="og:image" content="https://[[DOMAIN]]/images/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Projects | [[FULL NAME]]">
+  <meta name="twitter:description" content="[[ONE SENTENCE ON THE KINDS OF WORK SHOWN HERE]]">
+  <meta name="twitter:image" content="https://[[DOMAIN]]/images/og-image.png">
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap">
+  <link rel="stylesheet" href="css/styles.css">
+
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="index.html">[[SHORT NAME]]</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="Open menu">
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+      </button>
+      <nav class="nav-menu" id="site-menu" aria-label="Primary">
+        <ul class="nav-links">
+          <li><a href="projects.html" aria-current="page">Projects</a></li>
+          <li><a href="index.html#experience">Experience</a></li>
+          <li><a href="index.html#education">Education</a></li>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <header class="container page-header">
+      <p class="eyebrow">Work</p>
+      <h1>All Projects</h1>
+      <p class="lead">[[SUBTITLE: one line on the kinds of projects collected here.]]</p>
+    </header>
+
+    <!-- TIER 1: flagship projects. Full write-ups, stacked. -->
+    <!--
+      TIER 1 TEMPLATE: copy from <article> to </article>, paste it after the
+      last article, then edit. Rules:
+        - The id is the project's URL slug: lowercase, hyphens, unique. The
+          home page card links to projects.html#<this id>.
+        - Keep aria-labelledby equal to the id of the h2 inside.
+        - Delete any button in .project-links that you have no link for.
+        - Put images in images/projects/<slug>/. Every image needs a real
+          width, height and alt text. The link around it is the full-size file.
+
+      <article class="project" id="your-project-slug" aria-labelledby="your-project-slug-title">
+        <p class="eyebrow">Category</p>
+        <h2 id="your-project-slug-title">Project title</h2>
+        <p class="project-context">Organization, lab, course or client. Mon YYYY to Mon YYYY</p>
+        <ul class="tags">
+          <li class="tag">Tool</li>
+        </ul>
+        <p class="project-description">Two to four sentences on the problem and what you built.</p>
+        <ul class="project-points">
+          <li>What you did, results first, with numbers where possible.</li>
+        </ul>
+        <div class="project-links">
+          <a class="btn btn-secondary btn-sm" href="URL" target="_blank" rel="noopener">Paper</a>
+          <a class="btn btn-secondary btn-sm" href="URL" target="_blank" rel="noopener">Poster</a>
+          <a class="btn btn-secondary btn-sm" href="URL" target="_blank" rel="noopener">Code</a>
+          <a class="btn btn-secondary btn-sm" href="URL" target="_blank" rel="noopener">Demo</a>
+          <a class="btn btn-secondary btn-sm" href="URL" target="_blank" rel="noopener">Slides</a>
+        </div>
+        <div class="gallery">
+          <figure>
+            <a class="gallery-link" href="images/projects/your-project-slug/figure-1.jpg" data-lightbox>
+              <img src="images/projects/your-project-slug/figure-1.jpg" width="1600" height="1000" loading="lazy" alt="Describe what the image shows">
+            </a>
+            <figcaption>Short caption.</figcaption>
+          </figure>
+        </div>
+      </article>
+    -->
+    <section class="container flagship" aria-label="Flagship projects">
+
+      <article class="project" id="project-one" aria-labelledby="project-one-title">
+        <p class="eyebrow">[[CATEGORY]]</p>
+        <h2 id="project-one-title">[[PROJECT ONE TITLE]]</h2>
+        <p class="project-context">[[ORGANIZATION / LAB / COURSE / CLIENT]], [[DATES]]</p>
+        <ul class="tags">
+          <li class="tag">[[TOOL]]</li>
+          <li class="tag">[[TOOL]]</li>
+          <li class="tag">[[TOOL]]</li>
+        </ul>
+        <p class="project-description">[[DESCRIPTION: two to four sentences on the problem and what you built.]]</p>
+        <ul class="project-points">
+          <li>[[BULLET: results first, with numbers where possible]]</li>
+          <li>[[BULLET]]</li>
+          <li>[[BULLET]]</li>
+        </ul>
+        <div class="project-links">
+          <a class="btn btn-secondary btn-sm" href="[[PAPER URL]]" target="_blank" rel="noopener">Paper</a>
+          <a class="btn btn-secondary btn-sm" href="[[POSTER URL]]" target="_blank" rel="noopener">Poster</a>
+          <a class="btn btn-secondary btn-sm" href="[[CODE URL]]" target="_blank" rel="noopener">Code</a>
+          <a class="btn btn-secondary btn-sm" href="[[DEMO URL]]" target="_blank" rel="noopener">Demo</a>
+        </div>
+        <div class="gallery">
+          <figure>
+            <a class="gallery-link" href="images/placeholder-16x10.svg" data-lightbox>
+              <img src="images/placeholder-16x10.svg" width="1600" height="1000" loading="lazy" alt="[[ALT TEXT: figure 1 of project one]]">
+            </a>
+            <figcaption>[[CAPTION]]</figcaption>
+          </figure>
+          <figure>
+            <a class="gallery-link" href="images/placeholder-16x10.svg" data-lightbox>
+              <img src="images/placeholder-16x10.svg" width="1600" height="1000" loading="lazy" alt="[[ALT TEXT: figure 2 of project one]]">
+            </a>
+            <figcaption>[[CAPTION]]</figcaption>
+          </figure>
+        </div>
+      </article>
+
+      <article class="project" id="project-two" aria-labelledby="project-two-title">
+        <p class="eyebrow">[[CATEGORY]]</p>
+        <h2 id="project-two-title">[[PROJECT TWO TITLE]]</h2>
+        <p class="project-context">[[ORGANIZATION / LAB / COURSE / CLIENT]], [[DATES]]</p>
+        <ul class="tags">
+          <li class="tag">[[TOOL]]</li>
+          <li class="tag">[[TOOL]]</li>
+        </ul>
+        <p class="project-description">[[DESCRIPTION]]</p>
+        <ul class="project-points">
+          <li>[[BULLET]]</li>
+          <li>[[BULLET]]</li>
+          <li>[[BULLET]]</li>
+        </ul>
+        <div class="project-links">
+          <a class="btn btn-secondary btn-sm" href="[[CODE URL]]" target="_blank" rel="noopener">Code</a>
+          <a class="btn btn-secondary btn-sm" href="[[SLIDES URL]]" target="_blank" rel="noopener">Slides</a>
+        </div>
+        <div class="gallery">
+          <figure>
+            <a class="gallery-link" href="images/placeholder-16x10.svg" data-lightbox>
+              <img src="images/placeholder-16x10.svg" width="1600" height="1000" loading="lazy" alt="[[ALT TEXT: figure 1 of project two]]">
+            </a>
+            <figcaption>[[CAPTION]]</figcaption>
+          </figure>
+          <figure>
+            <a class="gallery-link" href="images/placeholder-16x10.svg" data-lightbox>
+              <img src="images/placeholder-16x10.svg" width="1600" height="1000" loading="lazy" alt="[[ALT TEXT: figure 2 of project two]]">
+            </a>
+            <figcaption>[[CAPTION]]</figcaption>
+          </figure>
+        </div>
+      </article>
+
+      <article class="project" id="project-three" aria-labelledby="project-three-title">
+        <p class="eyebrow">[[CATEGORY]]</p>
+        <h2 id="project-three-title">[[PROJECT THREE TITLE]]</h2>
+        <p class="project-context">[[ORGANIZATION / LAB / COURSE / CLIENT]], [[DATES]]</p>
+        <ul class="tags">
+          <li class="tag">[[TOOL]]</li>
+          <li class="tag">[[TOOL]]</li>
+        </ul>
+        <p class="project-description">[[DESCRIPTION]]</p>
+        <ul class="project-points">
+          <li>[[BULLET]]</li>
+          <li>[[BULLET]]</li>
+          <li>[[BULLET]]</li>
+        </ul>
+        <div class="project-links">
+          <a class="btn btn-secondary btn-sm" href="[[PAPER URL]]" target="_blank" rel="noopener">Paper</a>
+          <a class="btn btn-secondary btn-sm" href="[[POSTER URL]]" target="_blank" rel="noopener">Poster</a>
+        </div>
+        <div class="gallery">
+          <figure>
+            <a class="gallery-link" href="images/placeholder-16x10.svg" data-lightbox>
+              <img src="images/placeholder-16x10.svg" width="1600" height="1000" loading="lazy" alt="[[ALT TEXT: figure 1 of project three]]">
+            </a>
+            <figcaption>[[CAPTION]]</figcaption>
+          </figure>
+          <figure>
+            <a class="gallery-link" href="images/placeholder-16x10.svg" data-lightbox>
+              <img src="images/placeholder-16x10.svg" width="1600" height="1000" loading="lazy" alt="[[ALT TEXT: figure 2 of project three]]">
+            </a>
+            <figcaption>[[CAPTION]]</figcaption>
+          </figure>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- TIER 2: smaller projects. Compact cards, no images, grouped by category. -->
+    <!--
+      TIER 2 TEMPLATE: copy one <li> into an existing group's list. To add a
+      new category, copy a whole <div class="group"> block and rename it.
+
+      <li>
+        <article class="card">
+          <div class="card-body">
+            <p class="card-tag">Category</p>
+            <h4 class="card-title">Project title</h4>
+            <p class="card-text">Two or three sentences.</p>
+            <ul class="tags">
+              <li class="tag">Tool</li>
+            </ul>
+            <div class="card-links">
+              <a class="btn btn-secondary btn-sm" href="URL" target="_blank" rel="noopener">Code</a>
+              <a class="btn btn-secondary btn-sm" href="URL" target="_blank" rel="noopener">Paper</a>
+            </div>
+          </div>
+        </article>
+      </li>
+    -->
+    <section class="section" aria-labelledby="more-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">More Work</p>
+          <h2 class="h2" id="more-title">Smaller Projects</h2>
+        </div>
+
+        <div class="group">
+          <h3 class="group-title">[[CATEGORY A]]</h3>
+          <ul class="card-grid card-grid-3">
+            <li>
+              <article class="card">
+                <div class="card-body">
+                  <p class="card-tag">[[CATEGORY A]]</p>
+                  <h4 class="card-title">[[PROJECT TITLE]]</h4>
+                  <p class="card-text">[[DESCRIPTION: two or three sentences.]]</p>
+                  <ul class="tags">
+                    <li class="tag">[[TOOL]]</li>
+                    <li class="tag">[[TOOL]]</li>
+                  </ul>
+                  <div class="card-links">
+                    <a class="btn btn-secondary btn-sm" href="[[CODE URL]]" target="_blank" rel="noopener">Code</a>
+                  </div>
+                </div>
+              </article>
+            </li>
+            <li>
+              <article class="card">
+                <div class="card-body">
+                  <p class="card-tag">[[CATEGORY A]]</p>
+                  <h4 class="card-title">[[PROJECT TITLE]]</h4>
+                  <p class="card-text">[[DESCRIPTION]]</p>
+                  <ul class="tags">
+                    <li class="tag">[[TOOL]]</li>
+                  </ul>
+                  <div class="card-links">
+                    <a class="btn btn-secondary btn-sm" href="[[CODE URL]]" target="_blank" rel="noopener">Code</a>
+                    <a class="btn btn-secondary btn-sm" href="[[PAPER URL]]" target="_blank" rel="noopener">Paper</a>
+                  </div>
+                </div>
+              </article>
+            </li>
+            <li>
+              <article class="card">
+                <div class="card-body">
+                  <p class="card-tag">[[CATEGORY A]]</p>
+                  <h4 class="card-title">[[PROJECT TITLE]]</h4>
+                  <p class="card-text">[[DESCRIPTION]]</p>
+                  <ul class="tags">
+                    <li class="tag">[[TOOL]]</li>
+                  </ul>
+                </div>
+              </article>
+            </li>
+          </ul>
+        </div>
+
+        <div class="group">
+          <h3 class="group-title">[[CATEGORY B]]</h3>
+          <ul class="card-grid card-grid-3">
+            <li>
+              <article class="card">
+                <div class="card-body">
+                  <p class="card-tag">[[CATEGORY B]]</p>
+                  <h4 class="card-title">[[PROJECT TITLE]]</h4>
+                  <p class="card-text">[[DESCRIPTION]]</p>
+                  <ul class="tags">
+                    <li class="tag">[[TOOL]]</li>
+                  </ul>
+                  <div class="card-links">
+                    <a class="btn btn-secondary btn-sm" href="[[CODE URL]]" target="_blank" rel="noopener">Code</a>
+                  </div>
+                </div>
+              </article>
+            </li>
+            <li>
+              <article class="card">
+                <div class="card-body">
+                  <p class="card-tag">[[CATEGORY B]]</p>
+                  <h4 class="card-title">[[PROJECT TITLE]]</h4>
+                  <p class="card-text">[[DESCRIPTION]]</p>
+                  <ul class="tags">
+                    <li class="tag">[[TOOL]]</li>
+                  </ul>
+                </div>
+              </article>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>[[FULL NAME]] &mdash; <span data-year>2026</span></p>
+      <ul class="footer-links">
+        <li><a href="mailto:[[EMAIL]]">Email</a></li>
+        <li><a href="[[LINKEDIN URL]]" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="[[GITHUB URL]]" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="[[SCHOLAR OR ORCID URL]]" target="_blank" rel="noopener">Scholar</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>

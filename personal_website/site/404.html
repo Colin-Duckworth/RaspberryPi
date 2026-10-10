@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Page not found | [[FULL NAME]]</title>
+  <meta name="description" content="This page does not exist.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#ffffff">
+
+  <!-- Asset paths start with "/" on purpose. nginx serves this file for any
+       missing URL, including deep ones like /a/b/c, where relative paths
+       would break. (It means this one page does not work from file://.) -->
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="/index.html">[[SHORT NAME]]</a>
+    </div>
+  </header>
+
+  <main id="main" class="notfound">
+    <div class="container">
+      <p class="eyebrow">404</p>
+      <h1>Page not found</h1>
+      <p class="lead">That address does not lead anywhere on this site.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="/index.html">Back to home</a>
+        <a class="btn btn-secondary" href="/projects.html">View projects</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>[[FULL NAME]] &mdash; <span data-year>2026</span></p>
+    </div>
+  </footer>
+
+  <script src="/js/main.js" defer></script>
+</body>
+</html>

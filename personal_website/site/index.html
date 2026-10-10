@@ -3,11 +3,269 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hello from the Pi</title>
+  <title>[[FULL NAME]] | [[FIELD]]</title>
+  <meta name="description" content="[[FULL NAME]], [[FIELD]]. Selected projects, experience and education. [[ONE SENTENCE SUMMARY]]">
+  <link rel="canonical" href="https://[[DOMAIN]]/">
+  <meta name="theme-color" content="#ffffff">
+
+  <!-- Link previews (email, Slack, LinkedIn). Replace images/og-image.png with a real 1200x630 image. -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="[[FULL NAME]] | [[FIELD]]">
+  <meta property="og:description" content="[[ONE SENTENCE SUMMARY]]">
+  <meta property="og:url" content="https://[[DOMAIN]]/">
+  <meta property="og:image" content="https://[[DOMAIN]]/images/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="[[FULL NAME]] | [[FIELD]]">
+  <meta name="twitter:description" content="[[ONE SENTENCE SUMMARY]]">
+  <meta name="twitter:image" content="https://[[DOMAIN]]/images/og-image.png">
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
+  <!-- One font family, loaded with font-display: swap. The system stack in
+       styles.css is used until it arrives, or if it is blocked. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap">
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Marks that JS is available, so CSS can collapse the nav only then. -->
+  <script>document.documentElement.classList.add('js');</script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "[[FULL NAME]]",
+    "jobTitle": "[[JOB TITLE]]",
+    "alumniOf": "[[INSTITUTION]]",
+    "url": "https://[[DOMAIN]]/",
+    "sameAs": ["[[LINKEDIN URL]]", "[[GITHUB URL]]", "[[SCHOLAR OR ORCID URL]]"]
+  }
+  </script>
 </head>
 <body>
-  <h1>Hello from the Pi</h1>
-  <p>Placeholder page. If you can read this in a browser, nginx on the Raspberry Pi
-  is serving files from this folder How we doin tonight ladies and gents.</p>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="index.html">[[SHORT NAME]]</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="Open menu">
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+      </button>
+      <nav class="nav-menu" id="site-menu" aria-label="Primary">
+        <ul class="nav-links">
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="index.html#experience">Experience</a></li>
+          <li><a href="index.html#education">Education</a></li>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- 1. Hero -->
+    <section class="section hero" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">[[FIELD]]</p>
+          <h1 id="hero-title">[[FULL NAME]]</h1>
+          <p class="lead">[[INTRO: two or three sentences on what you do and what you are looking for.]]</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="projects.html">View Projects</a>
+            <a class="btn btn-secondary" href="assets/firstname-lastname-resume.pdf" target="_blank" rel="noopener">Download Resume</a>
+            <a class="btn btn-text" href="mailto:[[EMAIL]]">Get in Touch</a>
+          </div>
+        </div>
+        <!-- Hero photo: not lazy-loaded, it is above the fold. Swap the src for images/profile.jpg. -->
+        <img class="hero-photo" src="images/placeholder-4x5.svg" width="800" height="1000" alt="[[ALT TEXT: portrait of FULL NAME]]">
+      </div>
+    </section>
+
+    <!-- 2. Featured projects -->
+    <!--
+      FEATURED CARD TEMPLATE. The href must be projects.html# followed by the
+      id of a Tier 1 article on projects.html. Keep exactly three cards.
+
+      <li>
+        <a class="card" href="projects.html#your-project-slug">
+          <img class="card-media" src="images/projects/your-project-slug/cover.jpg" width="1600" height="1000" loading="lazy" alt="Describe the cover image">
+          <div class="card-body">
+            <p class="card-tag">Category</p>
+            <h3 class="card-title">Project title</h3>
+            <p class="card-text">One sentence summary.</p>
+          </div>
+        </a>
+      </li>
+    -->
+    <section class="section" aria-labelledby="featured-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Highlights</p>
+          <h2 class="h2" id="featured-title">Featured Projects</h2>
+        </div>
+        <ul class="card-grid card-grid-3">
+          <li>
+            <a class="card" href="projects.html#project-one">
+              <img class="card-media" src="images/placeholder-16x10.svg" width="1600" height="1000" loading="lazy" alt="[[ALT TEXT: cover image for project one]]">
+              <div class="card-body">
+                <p class="card-tag">[[CATEGORY]]</p>
+                <h3 class="card-title">[[PROJECT ONE TITLE]]</h3>
+                <p class="card-text">[[HOME CARD ONE-LINER]]</p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a class="card" href="projects.html#project-two">
+              <img class="card-media" src="images/placeholder-16x10.svg" width="1600" height="1000" loading="lazy" alt="[[ALT TEXT: cover image for project two]]">
+              <div class="card-body">
+                <p class="card-tag">[[CATEGORY]]</p>
+                <h3 class="card-title">[[PROJECT TWO TITLE]]</h3>
+                <p class="card-text">[[HOME CARD ONE-LINER]]</p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a class="card" href="projects.html#project-three">
+              <img class="card-media" src="images/placeholder-16x10.svg" width="1600" height="1000" loading="lazy" alt="[[ALT TEXT: cover image for project three]]">
+              <div class="card-body">
+                <p class="card-tag">[[CATEGORY]]</p>
+                <h3 class="card-title">[[PROJECT THREE TITLE]]</h3>
+                <p class="card-text">[[HOME CARD ONE-LINER]]</p>
+              </div>
+            </a>
+          </li>
+        </ul>
+        <a class="more-link" href="projects.html">View All Projects &rarr;</a>
+      </div>
+    </section>
+
+    <!-- 3. Experience (most recent first) -->
+    <!--
+      EXPERIENCE TEMPLATE: copy one <li> and paste it at the top of the list.
+
+      <li>
+        <div>
+          <h3 class="entry-title">Role</h3>
+          <p class="entry-org">Organization</p>
+        </div>
+        <p class="entry-date">Mon YYYY &ndash; Present</p>
+        <ul class="entry-bullets">
+          <li>What you did, results first.</li>
+        </ul>
+      </li>
+    -->
+    <section class="section" id="experience" aria-labelledby="experience-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Experience</p>
+          <h2 class="h2" id="experience-title">Where I&rsquo;ve Worked</h2>
+        </div>
+        <ul class="entries">
+          <li>
+            <div>
+              <h3 class="entry-title">[[ROLE]]</h3>
+              <p class="entry-org">[[ORGANIZATION]]</p>
+            </div>
+            <p class="entry-date">[[DATES]]</p>
+            <ul class="entry-bullets">
+              <li>[[BULLET: what you did, results first, with numbers where possible]]</li>
+              <li>[[BULLET]]</li>
+            </ul>
+          </li>
+          <li>
+            <div>
+              <h3 class="entry-title">[[ROLE]]</h3>
+              <p class="entry-org">[[ORGANIZATION]]</p>
+            </div>
+            <p class="entry-date">[[DATES]]</p>
+            <ul class="entry-bullets">
+              <li>[[BULLET]]</li>
+              <li>[[BULLET]]</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 4. Education (most recent first). Delete any detail line you do not need. -->
+    <section class="section" id="education" aria-labelledby="education-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Education</p>
+          <h2 class="h2" id="education-title">Education</h2>
+        </div>
+        <ul class="entries">
+          <li>
+            <div>
+              <h3 class="entry-title">[[DEGREE, MAJOR / MINOR]]</h3>
+              <p class="entry-org">[[INSTITUTION]]</p>
+            </div>
+            <p class="entry-date">[[DATES]]</p>
+            <ul class="entry-details">
+              <li>GPA: [[GPA]]</li>
+              <li>Honors: [[HONORS]]</li>
+              <li>Thesis / advisor: [[THESIS TITLE, ADVISOR]]</li>
+              <li>Relevant coursework: [[COURSES]]</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 5. About -->
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Background</p>
+          <h2 class="h2" id="about-title">About Me</h2>
+        </div>
+        <div class="lead prose">
+          <p>[[ABOUT PARAGRAPH 1]]</p>
+          <p>[[ABOUT PARAGRAPH 2]]</p>
+          <p>[[ABOUT PARAGRAPH 3]]</p>
+        </div>
+        <ul class="stats">
+          <li class="stat"><span class="stat-num">[[NUMBER]]</span><span class="stat-label">[[LABEL]]</span></li>
+          <li class="stat"><span class="stat-num">[[NUMBER]]</span><span class="stat-label">[[LABEL]]</span></li>
+          <li class="stat"><span class="stat-num">[[NUMBER]]</span><span class="stat-label">[[LABEL]]</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 6. Contact. Delete any link you do not have. -->
+    <section class="section" id="contact" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Say Hello</p>
+          <h2 class="h2" id="contact-title">Get in Touch</h2>
+        </div>
+        <p class="lead">[[CONTACT LINE: what you are open to, e.g. research collaborations and full-time roles.]]</p>
+        <div class="contact-links">
+          <a href="mailto:[[EMAIL]]">[[EMAIL]]</a>
+          <a href="[[LINKEDIN URL]]" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="[[GITHUB URL]]" target="_blank" rel="noopener">GitHub</a>
+          <a href="[[SCHOLAR OR ORCID URL]]" target="_blank" rel="noopener">Google Scholar / ORCID</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>[[FULL NAME]] &mdash; <span data-year>2026</span></p>
+      <ul class="footer-links">
+        <li><a href="mailto:[[EMAIL]]">Email</a></li>
+        <li><a href="[[LINKEDIN URL]]" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="[[GITHUB URL]]" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="[[SCHOLAR OR ORCID URL]]" target="_blank" rel="noopener">Scholar</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
 </body>
 </html>

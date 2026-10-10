@@ -1,0 +1,983 @@
+/* ==========================================================================
+   styles.css: personal portfolio
+
+   One shared stylesheet for every page. Order:
+     1. Design tokens (the only place colours, type and spacing are defined)
+     2. Base / reset
+     3. Layout helpers
+     4. Components (header, buttons, cards, entries, tags, gallery, lightbox)
+     5. Page-specific blocks (hero, project articles, 404)
+
+   Mobile-first: the base rules are the phone layout; @media (min-width) adds
+   to them at 768px and 1024px. Light mode only, by design.
+   ========================================================================== */
+
+/* 1. Design tokens -------------------------------------------------------- */
+:root {
+  /* Type: a single family. The fallback stack is what shows until the web
+     font arrives (font-display: swap) or if it never does. */
+  --font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  /* Colour: one neutral text, one muted text, one accent.
+     Every text/background pair below is checked at >= 4.5:1 (WCAG AA). */
+  --bg: #ffffff;
+  --bg-alt: #f6f6f9;
+  --text: #17171c;
+  --muted: #565664;
+  --border: #e4e4ea;
+  --border-strong: #c9c9d3;
+  --accent: #4338ca;
+  --accent-strong: #3730a3;
+  --accent-tint: #eef0ff;
+  --on-accent: #ffffff;
+
+  /* Spacing scale (4px steps, in rem so it follows the user's font size) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+
+  --radius-sm: 6px;
+  --radius: 12px;
+  --radius-lg: 18px;
+
+  --container: 1100px;
+  --gutter: clamp(1.25rem, 4vw, 2rem);
+  --nav-h: 64px;
+
+  --shadow-hover: 0 12px 32px rgba(23, 23, 28, 0.1);
+}
+
+/* 2. Base ----------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  /* Anchor jumps would otherwise hide the heading under the sticky header. */
+  scroll-padding-top: calc(var(--nav-h) + 1rem);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  overflow-wrap: break-word;
+}
+
+h1, h2, h3, h4, p, ul, ol, figure, dl {
+  margin: 0;
+}
+
+ul, ol {
+  padding: 0;
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: var(--accent);
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+
+a:hover {
+  color: var(--accent-strong);
+}
+
+/* Visible focus on everything interactive. The accent has high contrast on
+   the white page, so one ring style works everywhere. */
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--space-4);
+  top: -4rem;
+  z-index: 100;
+  padding: var(--space-3) var(--space-4);
+  background: var(--accent);
+  color: var(--on-accent);
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: var(--space-3);
+  color: var(--on-accent);
+}
+
+/* 3. Layout helpers -------------------------------------------------------- */
+.container {
+  width: 100%;
+  max-width: calc(var(--container) + 2 * var(--gutter));
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: clamp(3rem, 8vw, 5.5rem);
+}
+
+/* A thin rule between consecutive sections, instead of boxes or banners. */
+.section + .section {
+  border-top: 1px solid var(--border);
+}
+
+.section-head {
+  margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.eyebrow {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--space-3);
+}
+
+.h2 {
+  font-size: clamp(1.75rem, 1.2rem + 2vw, 2.5rem);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  font-weight: 700;
+}
+
+.lead {
+  font-size: clamp(1.0625rem, 1rem + 0.4vw, 1.25rem);
+  color: var(--muted);
+  max-width: 38rem;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+/* Running text: space between paragraphs. */
+.prose > * + * {
+  margin-top: var(--space-4);
+}
+
+/* 4. Components ------------------------------------------------------------ */
+
+/* Header and navigation */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--bg);
+  border-bottom: 1px solid transparent;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+/* Added by main.js once the page has scrolled. */
+.site-header.is-scrolled {
+  background: rgba(255, 255, 255, 0.86);
+  border-bottom-color: var(--border);
+  -webkit-backdrop-filter: saturate(180%) blur(10px);
+  backdrop-filter: saturate(180%) blur(10px);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: var(--nav-h);
+  gap: var(--space-4);
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 1.0625rem;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+.brand:hover {
+  color: var(--accent);
+}
+
+/* Without JS the links are always visible (a wrapping row). With JS the
+   `js` class on <html> turns them into a toggled panel on small screens. */
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0 var(--space-4);
+}
+
+.nav-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-inline: var(--space-1);
+  color: var(--muted);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.nav-links a:hover,
+.nav-links a[aria-current="page"] {
+  color: var(--text);
+}
+
+.nav-links a[aria-current="page"] {
+  font-weight: 600;
+  box-shadow: inset 0 -2px 0 var(--accent);
+}
+
+.nav-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  color: var(--text);
+  cursor: pointer;
+}
+
+/* The hamburger: one span drawn as three bars. */
+.nav-toggle-bar,
+.nav-toggle-bar::before,
+.nav-toggle-bar::after {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 2px;
+}
+
+.nav-toggle-bar {
+  position: relative;
+}
+
+.nav-toggle-bar::before,
+.nav-toggle-bar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+
+.nav-toggle-bar::before { top: -6px; }
+.nav-toggle-bar::after  { top: 6px; }
+
+/* Open state is shown as an X. */
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar {
+  background: transparent;
+}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar::after {
+  top: 0;
+  transform: rotate(-45deg);
+}
+
+.js .nav-toggle {
+  display: inline-flex;
+}
+
+.js .nav-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  padding: var(--space-2) var(--gutter) var(--space-4);
+}
+
+.js .nav-menu.is-open {
+  display: block;
+}
+
+.js .nav-links {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  max-width: var(--container);
+  margin-inline: auto;
+}
+
+.js .nav-links a {
+  width: 100%;
+  padding-inline: 0;
+  border-bottom: 1px solid var(--border);
+  box-shadow: none;
+}
+
+.js .nav-links a[aria-current="page"] {
+  color: var(--accent);
+  box-shadow: none;
+}
+
+@media (min-width: 768px) {
+  .js .nav-toggle {
+    display: none;
+  }
+
+  .js .nav-menu,
+  .js .nav-menu.is-open {
+    display: block;
+    position: static;
+    background: transparent;
+    border: 0;
+    padding: 0;
+  }
+
+  .js .nav-links {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    max-width: none;
+    margin: 0;
+  }
+
+  .js .nav-links a {
+    width: auto;
+    padding-inline: var(--space-1);
+    border-bottom: 0;
+  }
+
+  .js .nav-links a[aria-current="page"] {
+    color: var(--text);
+    box-shadow: inset 0 -2px 0 var(--accent);
+  }
+}
+
+/* Buttons. min-height 44px keeps tap targets at the recommended size. */
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.5rem 1.25rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  font: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.btn-primary:hover {
+  background: var(--accent-strong);
+  color: var(--on-accent);
+}
+
+.btn-secondary {
+  background: var(--bg);
+  color: var(--text);
+  border-color: var(--border-strong);
+}
+
+.btn-secondary:hover {
+  border-color: var(--text);
+  color: var(--text);
+}
+
+.btn-text {
+  color: var(--accent);
+  padding-inline: var(--space-2);
+}
+
+.btn-text:hover {
+  text-decoration: underline;
+}
+
+/* Small variant for the per-project "Paper / Code / Demo" links. */
+.btn-sm {
+  min-height: 44px;
+  padding: 0.35rem 1rem;
+  font-size: 0.875rem;
+}
+
+/* Cards (home page featured projects, projects page smaller projects) */
+.card-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-5);
+}
+
+@media (min-width: 768px) {
+  .card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .card-grid-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  color: inherit;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+a.card:hover {
+  color: inherit;
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--border-strong);
+}
+
+.card-media {
+  aspect-ratio: 16 / 10;
+  width: 100%;
+  object-fit: cover;
+  background: var(--bg-alt);
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-5);
+  flex: 1;
+}
+
+.card-tag {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.card-title {
+  font-size: 1.1875rem;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  font-weight: 700;
+}
+
+.card-text {
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+
+.card-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: auto;
+  padding-top: var(--space-2);
+}
+
+.more-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: var(--space-5);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.more-link:hover {
+  text-decoration: underline;
+}
+
+/* Tag pills (tools and technologies) */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.tag {
+  padding: 0.15rem 0.65rem;
+  border-radius: 999px;
+  background: var(--accent-tint);
+  color: var(--accent-strong);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* Experience and education entries: a left block, the date on the right
+   (below the title on phones), then the bullet list. */
+.entries > li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-1) var(--space-5);
+  padding-block: var(--space-5);
+  border-top: 1px solid var(--border);
+}
+
+.entries > li:last-child {
+  border-bottom: 1px solid var(--border);
+}
+
+.entry-title {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.entry-org {
+  color: var(--accent);
+  font-weight: 500;
+  font-size: 0.9375rem;
+}
+
+.entry-date {
+  color: var(--muted);
+  font-size: 0.875rem;
+  white-space: nowrap;
+}
+
+.entry-details,
+.entry-bullets {
+  grid-column: 1 / -1;
+  margin-top: var(--space-3);
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+
+.entry-bullets li,
+.entry-details li {
+  position: relative;
+  padding-left: 1.1rem;
+}
+
+.entry-bullets li + li,
+.entry-details li + li {
+  margin-top: var(--space-2);
+}
+
+.entry-bullets li::before,
+.entry-details li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.7em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--border-strong);
+}
+
+@media (min-width: 768px) {
+  .entries > li {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .entry-date {
+    grid-column: 2;
+    grid-row: 1;
+    text-align: right;
+    padding-top: 0.2rem;
+  }
+}
+
+/* Stat highlights */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-4);
+  margin-top: var(--space-7);
+}
+
+.stat {
+  padding: var(--space-5) var(--space-2);
+  overflow-wrap: anywhere;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-align: center;
+}
+
+.stat-num {
+  display: block;
+  font-size: clamp(1.5rem, 1rem + 2vw, 2.25rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.stat-label {
+  display: block;
+  margin-top: var(--space-1);
+  color: var(--muted);
+  font-size: 0.8125rem;
+}
+
+/* Gallery and lightbox */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+.gallery-link {
+  display: block;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  cursor: zoom-in;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.gallery-link:hover {
+  box-shadow: var(--shadow-hover);
+  border-color: var(--border-strong);
+}
+
+.gallery-link img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  background: var(--bg-alt);
+}
+
+.gallery figcaption {
+  margin-top: var(--space-2);
+  color: var(--muted);
+  font-size: 0.8125rem;
+}
+
+/* <dialog> opened with showModal(): the browser supplies the backdrop,
+   Escape handling, focus containment and inert page behind it. */
+.lightbox {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  max-width: min(96vw, 1200px);
+  max-height: 94vh;
+  overflow: visible;
+}
+
+.lightbox::backdrop {
+  background: rgba(15, 15, 22, 0.82);
+}
+
+.lightbox-figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.lightbox-img {
+  max-width: 100%;
+  max-height: 78vh;
+  width: auto;
+  height: auto;
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+}
+
+.lightbox-caption {
+  color: #ffffff;
+  font-size: 0.9375rem;
+  text-align: center;
+  max-width: 42rem;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: calc(-1 * var(--space-6) - 12px);
+  right: 0;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0 var(--space-4);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: var(--radius-sm);
+  background: rgba(15, 15, 22, 0.6);
+  color: #ffffff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.lightbox-close:focus-visible {
+  outline-color: #ffffff;
+}
+
+/* Footer */
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding-block: var(--space-6);
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3) var(--space-5);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--space-4);
+}
+
+.footer-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+/* 5. Page-specific blocks -------------------------------------------------- */
+
+/* Hero: photo above the text on phones, beside it from 768px. */
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-6);
+  align-items: center;
+}
+
+.hero-photo {
+  order: -1;
+  width: 100%;
+  max-width: 11rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: var(--bg-alt);
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 1.5rem + 4.5vw, 4rem);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  font-weight: 800;
+  margin-bottom: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .hero-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 20rem);
+    gap: var(--space-8);
+  }
+
+  .hero-photo {
+    order: 0;
+    max-width: none;
+  }
+}
+
+/* Page header on inner pages */
+.page-header {
+  padding-block: clamp(2.5rem, 7vw, 4.5rem) var(--space-6);
+}
+
+.page-header h1 {
+  font-size: clamp(2.25rem, 1.5rem + 3.5vw, 3.25rem);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  font-weight: 800;
+  margin-bottom: var(--space-3);
+}
+
+/* The flagship block is not a .section, so it needs its own divider. */
+.flagship + .section {
+  border-top: 1px solid var(--border);
+}
+
+/* Flagship project articles */
+.project {
+  padding-block: clamp(2rem, 6vw, 3.5rem);
+  border-top: 1px solid var(--border);
+  max-width: 52rem;
+}
+
+.project:first-child {
+  border-top: 0;
+}
+
+.project h2 {
+  font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2rem);
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  font-weight: 700;
+}
+
+.project-context {
+  margin-top: var(--space-2);
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+
+.project .tags {
+  margin-top: var(--space-4);
+}
+
+.project-description {
+  margin-top: var(--space-5);
+}
+
+.project-points {
+  margin-top: var(--space-4);
+  color: var(--muted);
+}
+
+.project-points li {
+  position: relative;
+  padding-left: 1.25rem;
+}
+
+.project-points li + li {
+  margin-top: var(--space-2);
+}
+
+.project-points li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.7em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-5);
+}
+
+/* Smaller projects: category groups */
+.group + .group {
+  margin-top: var(--space-7);
+}
+
+.group-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: var(--space-4);
+}
+
+/* Contact */
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-5);
+  margin-top: var(--space-5);
+}
+
+.contact-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-weight: 600;
+}
+
+/* 404 */
+.notfound {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+}
+
+.notfound h1 {
+  font-size: clamp(2.25rem, 1.5rem + 3.5vw, 3.25rem);
+  letter-spacing: -0.03em;
+  font-weight: 800;
+  margin-bottom: var(--space-3);
+}
+
+/* Respect reduced motion: no transforms or transitions at all. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  a.card:hover {
+    transform: none;
+  }
+}

@@ -1,9 +1,11 @@
 # personal_website: a static site served by nginx on the Pi
 
-**Status:** nginx is installed and serving a placeholder page on the **LAN
-only**, deployed from this repo with one command. No content yet, no public
-name, no TLS, and not reachable from outside the home network. Those are
-deliberate later steps (see [Deferred](#deferred)).
+**Status:** nginx is installed and serving on the **LAN only**, deployed from
+this repo with one command. The site is a two-page portfolio **template**
+(home and projects, plus a 404 page) with every personal value left as a
+visible `[[PLACEHOLDER]]`; how to fill it in is in [`EDITING.md`](EDITING.md).
+No public name, no TLS, and not reachable from outside the home network. Those
+are deliberate later steps (see [Deferred](#deferred)).
 
 Personal details are placeholders here: `<pi-ip>`, `<pi-user>`, `<lan-cidr>`.
 Real values live in the git-ignored `base/pi.env`.
@@ -20,7 +22,7 @@ result.
 |---|---|
 | Server | nginx (Debian package), plain HTTP on port 80 |
 | Site type | Static files only: no database, no application server, nothing to run besides nginx |
-| Source | [`site/`](site/): this folder is exactly what gets published |
+| Source | [`site/`](site/): this folder is exactly what gets published. How to edit it: [`EDITING.md`](EDITING.md) |
 | Server config | [`nginx/personal_website.conf`](nginx/personal_website.conf) |
 | Deploy | [`scripts/deploy.sh`](scripts/deploy.sh): `rsync` over SSH |
 | On the Pi | web root `/var/www/personal_website`, config `/etc/nginx/sites-available/personal_website` |
@@ -161,6 +163,8 @@ site serves `/var/www/html`, not our web root.
 | 6 | `deploy.sh`: `Permission denied` writing to the Pi | Web root is not owned by my user | `ls -ld /var/www/personal_website` on the Pi | `sudo chown "$USER": /var/www/personal_website` |
 | 7 | `deploy.sh`: `Missing .../base/pi.env` | The git-ignored env file does not exist on this machine | `ls base/pi.env` | Copy from `pi.env.example` and fill in |
 | 8 | `<hostname>.local` does not resolve from the laptop | mDNS does not cross WSL2's NAT | `ping <hostname>.local` fails; IP works | Use the IP (`PI_ADDRESS`), or a Pi-hole Local DNS record |
+| 9 | The home page scrolls sideways on a phone (556px of content in a 320px viewport). **Hit on this build** | A grid track written as `1fr` cannot shrink below its content's minimum width, so one long unbreakable string (here the placeholder `[[NUMBER]]`) widened the whole page | In the browser at 320px: `document.documentElement.scrollWidth` exceeds the viewport; listing elements whose right edge passes it pointed at `.stat` | `minmax(0, 1fr)` in every grid, and `overflow-wrap` on text. A real email address or URL would have done the same |
+| 10 | A 375px headless screenshot looks cropped on the right | Headless Edge/Chrome will not make a window narrower than about 500px, so the shot is a wider layout cut to 375px | Text is cut mid-word while `scrollWidth` reports no overflow | Show the page in a 375px `<iframe>` inside a wider window and screenshot that |
 
 Logs: `/var/log/nginx/access.log` (every request) and `error.log` (why a request
 failed). Watching `access.log` while loading the page is the clearest view of
@@ -201,7 +205,12 @@ Decisions that come before the site is reachable from outside the LAN:
 - [x] Placeholder deployed with `deploy.sh`; loads in a browser on the LAN
 - [ ] Confirmed from a second device (phone)
 - [ ] `Server:` header shows no version (confirms `server_tokens off` is live)
-- [ ] Real content
+- [x] Portfolio template built: home, projects, 404, one stylesheet, one script
+- [x] Checked in Edge at 320 / 375 / 768 / 1024 / 1440 px: no horizontal scroll, expected grid columns, 44px tap targets, mobile menu, lightbox, deep links clear the sticky header, no console messages
+- [ ] Custom 404 page live: reinstall the nginx config (see [`EDITING.md`](EDITING.md#one-time-the-custom-404-page))
+- [ ] Real content (`grep -rn '\[\[' site` prints nothing)
+- [ ] Lighthouse scores (not run: it needs DevTools or CI)
+- [ ] Escape key and a screen reader tried by hand (the harness synthesised events; native `<dialog>` handles Escape)
 - [ ] LAN name via Pi-hole Local DNS
 - [ ] CGNAT check
 - [ ] Decision on public access (tunnel / VPS / VPN / none)

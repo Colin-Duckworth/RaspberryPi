@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000" role="img" aria-label="Placeholder portrait">
+  <!-- Neutral 4:5 placeholder for the hero photo. Replace the <img src> with images/profile.jpg. -->
+  <rect width="800" height="1000" fill="#e9e9ee"/>
+  <text x="400" y="500" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="48" fill="#565664">[[PROFILE PHOTO]]</text>
+</svg>
