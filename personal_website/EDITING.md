@@ -46,9 +46,7 @@ You are done when that prints nothing. The ones that are not obvious:
 | Placeholder | Where | Notes |
 |---|---|---|
 | `[[DOMAIN]]` | `<link rel="canonical">`, `og:` and `twitter:` tags, JSON-LD, both pages | Needed for correct link previews. Leave until there is a public name |
-| `[[SHORT NAME]]` | nav wordmark, on all three pages | e.g. `Jane D.` |
-| `[[LINKEDIN URL]]` etc. | contact section and footer | **Delete the whole `<a>`** (and its `<li>` in the footer) for any you do not have; an empty link is worse than none |
-| `FL` in `assets/favicon.svg` | the monogram | Your initials |
+| GitHub, Google Scholar / ORCID | contact section, footer, and `sameAs` in the JSON-LD in `index.html` | Not on the site yet because there is no URL. When you have one, add an `<a>` beside LinkedIn in both places and a URL to `sameAs`. An empty link is worse than none |
 | `[[IMAGE 16:10]]` | `images/placeholder-16x10.svg` | Replace the `src` (and `href` in galleries) with real images |
 | `[[PROFILE PHOTO]]` | `images/placeholder-4x5.svg` | Point the hero `<img>` at `images/profile.jpg` |
 
@@ -67,6 +65,23 @@ You are done when that prints nothing. The ones that are not obvious:
   ```
 
 - Every image needs `alt` text that says what it shows. Decorative images use `alt=""`.
+- **Where files go:** the portrait is `site/images/profile.jpg`; project figures
+  are in `site/images/projects/<slug>/`; `site/assets/` is only for the favicon and
+  the resume PDF. Use lowercase, hyphenated names.
+- **Portrait photos** (phone shots) are cropped to the 16:10 thumbnail. Give the
+  `<img>` `class="crop-upper"` to keep the top of the photo, where the subject
+  usually is, instead of the centre; the lightbox still shows the whole photo.
+  Phone photos carry a rotation tag: bake the rotation into the pixels when you
+  resize (as the existing ones were), or they show sideways in some viewers.
+- **A figure that only exists as a PDF** (a slide or a figure from a paper) has
+  to be rendered to PNG first; browsers will not put a PDF in an `<img>`.
+- **Diagrams** should not be cropped: give the `<img>` `class="fit-contain"` so it
+  is shown whole in the gallery (photos can be left to crop to the 16:10 cell).
+- **Everything in `site/` is published**, including files no page links to. Keep
+  working files (briefs, drafts, source documents) outside it, e.g. in
+  `personal_website/source-material/`.
+- Copying files from Windows into WSL leaves `*:Zone.Identifier` marker files
+  beside them; delete those before deploying.
 - `images/og-image.png` is a plain grey placeholder. Replace it with a 1200x630
   image (keep the name, or update the two `og:image`/`twitter:image` tags on
   each page if you switch to `.jpg`).
@@ -88,20 +103,34 @@ comment above `class="flagship"`.
 4. Gallery images are wrapped in `<a class="gallery-link" href="<full-size file>" data-lightbox>`;
    keep the `data-lightbox` attribute and the lightbox works with no further code.
 
-**Tier 2 (smaller project card):** copy one `<li>` from the template comment
-above the "Smaller Projects" section into a group's list. For a new category,
-copy a whole `<div class="group">`. These cards have no images.
+**Tier 2 (smaller project card):** there are none yet, so the whole "Smaller
+Projects" section in `projects.html` is commented out near the bottom of
+`<main>`. Move the closing `-->` of that comment to before the `<section>`
+(or delete the comment markers), then fill in the card. For another card, copy
+one `<li>`; for another category, copy a whole `<div class="group">`. These cards
+have no images.
+
+**In-progress project:** keep the first tag in the Tier 1 template,
+`<li class="tag tag-status">In progress</li>`. It renders as an outlined pill.
+
+**Publication:** in `index.html`, the "Publications" section has its own template
+comment. Copy one `<li>`, newest first. Put `<strong>` around your own name in the
+author list so it stands out, and delete the `.pub-links` block until there is a
+link. Adding the paper's link as a "Paper" button on the matching project in
+`projects.html` is worthwhile too.
 
 ## 4. Feature a project on the home page
 
-The home page shows exactly three cards (a 3-column grid on desktop). In
-`index.html`, edit or replace a card using the template comment above
-"Featured Projects": set the `href` to `projects.html#<slug>` of a Tier 1
-article, plus a cover image, a category, a title and a one-line summary.
+The home page shows exactly three cards (a 3-column grid on desktop). Right now
+they are the first three projects: the hydrology radar, the Z3U noise study and
+the underground sensor network. To change one, edit or replace a card in
+`index.html` using the template comment above "Featured Projects": set the
+`href` to `projects.html#<slug>` of a Tier 1 article, plus a cover image, a
+category, a title and a one-line summary.
 
 ## 5. Swap the resume PDF
 
-Replace `site/assets/firstname-lastname-resume.pdf` with your file **under the
+Replace `site/assets/colin-duckworth-resume.pdf` with your file **under the
 same name**, and deploy. To use a different name, update the one link in the hero
 section of `index.html`.
 

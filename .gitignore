@@ -20,3 +20,6 @@ id_*
 !id_*.pub.example
 *.pem
 *.key
+
+# Working files and source documents, never published or committed
+personal_website/source-material/

@@ -476,6 +476,18 @@ a:hover {
   }
 }
 
+/* Grid items stretch to the row height, but the card inside the <li> only
+   sized to its own content. Make the <li> a flex box so the card fills it and
+   every card in a row is the same height. */
+.card-grid > li {
+  display: flex;
+}
+
+.card-grid > li > .card {
+  flex: 1;
+  min-width: 0;
+}
+
 .card {
   display: flex;
   flex-direction: column;
@@ -567,6 +579,14 @@ a.card:hover {
   font-weight: 600;
 }
 
+/* Project status ("In progress"): outlined rather than tinted, so it reads
+   as a state and not as a technology. */
+.tag-status {
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border-strong);
+}
+
 /* Experience and education entries: a left block, the date on the right
    (below the title on phones), then the bullet list. */
 .entries > li {
@@ -643,6 +663,28 @@ a.card:hover {
   }
 }
 
+/* Publications reuse the entry layout (title and venue, year on the right);
+   these are the authors line and the link buttons under it. */
+.pub-authors {
+  grid-column: 1 / -1;
+  margin-top: var(--space-2);
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+
+.pub-authors strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.pub-links {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
 /* Stat highlights */
 .stats {
   display: grid;
@@ -677,7 +719,7 @@ a.card:hover {
 /* Gallery and lightbox */
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
   gap: var(--space-4);
   margin-top: var(--space-6);
 }
@@ -701,6 +743,18 @@ a.card:hover {
   aspect-ratio: 16 / 10;
   object-fit: cover;
   background: var(--bg-alt);
+}
+
+/* Diagrams are shown whole, not cropped to the thumbnail ratio. */
+.gallery-link img.fit-contain {
+  object-fit: contain;
+  background: var(--bg);
+}
+
+/* Portrait photos are cropped to the thumbnail ratio; keep the upper part
+   (the subject) instead of the centre. The lightbox shows the whole photo. */
+.gallery-link img.crop-upper {
+  object-position: 50% 30%;
 }
 
 .gallery figcaption {

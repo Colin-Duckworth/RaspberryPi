@@ -3,20 +3,20 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>[[FULL NAME]] | [[FIELD]]</title>
-  <meta name="description" content="[[FULL NAME]], [[FIELD]]. Selected projects, experience and education. [[ONE SENTENCE SUMMARY]]">
+  <title>Colin Duckworth | RF &amp; Microwave Engineering</title>
+  <meta name="description" content="Colin Duckworth, RF and microwave engineer. Radar hardware for remote sensing, from architecture and PCB design through integration and field deployment on UAS platforms.">
   <link rel="canonical" href="https://[[DOMAIN]]/">
   <meta name="theme-color" content="#ffffff">
 
   <!-- Link previews (email, Slack, LinkedIn). Replace images/og-image.png with a real 1200x630 image. -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="[[FULL NAME]] | [[FIELD]]">
-  <meta property="og:description" content="[[ONE SENTENCE SUMMARY]]">
+  <meta property="og:title" content="Colin Duckworth | RF &amp; Microwave Engineering">
+  <meta property="og:description" content="Radar hardware for remote sensing, from architecture and PCB design through field deployment on UAS platforms.">
   <meta property="og:url" content="https://[[DOMAIN]]/">
   <meta property="og:image" content="https://[[DOMAIN]]/images/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="[[FULL NAME]] | [[FIELD]]">
-  <meta name="twitter:description" content="[[ONE SENTENCE SUMMARY]]">
+  <meta name="twitter:title" content="Colin Duckworth | RF &amp; Microwave Engineering">
+  <meta name="twitter:description" content="Radar hardware for remote sensing, from architecture and PCB design through field deployment on UAS platforms.">
   <meta name="twitter:image" content="https://[[DOMAIN]]/images/og-image.png">
 
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -35,11 +35,11 @@
   {
     "@context": "https://schema.org",
     "@type": "Person",
-    "name": "[[FULL NAME]]",
-    "jobTitle": "[[JOB TITLE]]",
-    "alumniOf": "[[INSTITUTION]]",
+    "name": "Colin Duckworth",
+    "jobTitle": "Graduate RF Engineering Intern",
+    "alumniOf": "The University of Alabama",
     "url": "https://[[DOMAIN]]/",
-    "sameAs": ["[[LINKEDIN URL]]", "[[GITHUB URL]]", "[[SCHOLAR OR ORCID URL]]"]
+    "sameAs": ["https://www.linkedin.com/in/colin-duckworth/"]
   }
   </script>
 </head>
@@ -48,13 +48,14 @@
 
   <header class="site-header">
     <div class="container nav">
-      <a class="brand" href="index.html">[[SHORT NAME]]</a>
+      <a class="brand" href="index.html">Colin D.</a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="Open menu">
         <span class="nav-toggle-bar" aria-hidden="true"></span>
       </button>
       <nav class="nav-menu" id="site-menu" aria-label="Primary">
         <ul class="nav-links">
           <li><a href="projects.html">Projects</a></li>
+          <li><a href="index.html#publications">Publications</a></li>
           <li><a href="index.html#experience">Experience</a></li>
           <li><a href="index.html#education">Education</a></li>
           <li><a href="index.html#about">About</a></li>
@@ -70,21 +71,21 @@
     <section class="section hero" aria-labelledby="hero-title">
       <div class="container hero-grid">
         <div class="hero-copy">
-          <p class="eyebrow">[[FIELD]]</p>
-          <h1 id="hero-title">[[FULL NAME]]</h1>
-          <p class="lead">[[INTRO: two or three sentences on what you do and what you are looking for.]]</p>
+          <p class="eyebrow">RF &amp; Microwave Engineering</p>
+          <h1 id="hero-title">Colin Duckworth</h1>
+          <p class="lead">I design RF and microwave systems for remote sensing, from architecture and PCB design through integration and field deployment on UAS platforms. I recently graduated in Electrical Engineering from The University of Alabama and now work on RF front ends at QuadSAT in Odense, Denmark.</p>
           <div class="actions">
             <a class="btn btn-primary" href="projects.html">View Projects</a>
-            <a class="btn btn-secondary" href="assets/firstname-lastname-resume.pdf" target="_blank" rel="noopener">Download Resume</a>
-            <a class="btn btn-text" href="mailto:[[EMAIL]]">Get in Touch</a>
+            <a class="btn btn-secondary" href="assets/colin-duckworth-resume.pdf" target="_blank" rel="noopener">Download Resume</a>
+            <a class="btn btn-text" href="mailto:clduckworth@crimson.ua.edu">Get in Touch</a>
           </div>
         </div>
-        <!-- Hero photo: not lazy-loaded, it is above the fold. Swap the src for images/profile.jpg. -->
-        <img class="hero-photo" src="images/placeholder-4x5.svg" width="800" height="1000" alt="[[ALT TEXT: portrait of FULL NAME]]">
+        <!-- Hero photo: not lazy-loaded, it is above the fold. -->
+        <img class="hero-photo" src="images/profile.jpg" width="697" height="694" alt="Portrait of Colin Duckworth, smiling, in a grey zip-neck sweater in front of a brick wall">
       </div>
     </section>
 
-    <!-- 2. Featured projects -->
+    <!-- 2. Featured projects: exactly three. The rest live on projects.html. -->
     <!--
       FEATURED CARD TEMPLATE. The href must be projects.html# followed by the
       id of a Tier 1 article on projects.html. Keep exactly three cards.
@@ -108,32 +109,32 @@
         </div>
         <ul class="card-grid card-grid-3">
           <li>
-            <a class="card" href="projects.html#project-one">
-              <img class="card-media" src="images/placeholder-16x10.svg" width="1600" height="1000" loading="lazy" alt="[[ALT TEXT: cover image for project one]]">
+            <a class="card" href="projects.html#usgs-hydrology-radar">
+              <img class="card-media" src="images/projects/usgs-hydrology-radar/rf-chain.jpg" width="1100" height="690" loading="lazy" alt="Block diagram of the hydrology radar RF chain, from the RFSoC through amplifiers, filters and hybrids to a single switched antenna">
               <div class="card-body">
-                <p class="card-tag">[[CATEGORY]]</p>
-                <h3 class="card-title">[[PROJECT ONE TITLE]]</h3>
-                <p class="card-text">[[HOME CARD ONE-LINER]]</p>
+                <p class="card-tag">Radar Hardware</p>
+                <h3 class="card-title">VHF/UHF Hydrology Radar</h3>
+                <p class="card-text">RF lead for a 40&ndash;600 MHz FMCW radar payload for USGS river mapping, field-deployed in August 2026.</p>
               </div>
             </a>
           </li>
           <li>
-            <a class="card" href="projects.html#project-two">
-              <img class="card-media" src="images/placeholder-16x10.svg" width="1600" height="1000" loading="lazy" alt="[[ALT TEXT: cover image for project two]]">
+            <a class="card" href="projects.html#quadsat-z3u-noise-study">
+              <img class="card-media" src="images/placeholder-16x10.svg" width="1600" height="1000" loading="lazy" alt="[[ALT TEXT: cover image for the Z3U noise study]]">
               <div class="card-body">
-                <p class="card-tag">[[CATEGORY]]</p>
-                <h3 class="card-title">[[PROJECT TWO TITLE]]</h3>
-                <p class="card-text">[[HOME CARD ONE-LINER]]</p>
+                <p class="card-tag">Noise Study</p>
+                <h3 class="card-title">QuadSAT Z3U Noise Study</h3>
+                <p class="card-text">A C power-measurement tool and Y-factor analysis for characterising the noise figure of a software-defined radio.</p>
               </div>
             </a>
           </li>
           <li>
-            <a class="card" href="projects.html#project-three">
-              <img class="card-media" src="images/placeholder-16x10.svg" width="1600" height="1000" loading="lazy" alt="[[ALT TEXT: cover image for project three]]">
+            <a class="card" href="projects.html#underground-sensor-network">
+              <img class="card-media" src="images/projects/underground-sensor-network/field-test.jpg" width="1600" height="1200" loading="lazy" alt="An engineer holding a laptop beside a tripod-mounted panel antenna in an underground mine">
               <div class="card-body">
-                <p class="card-tag">[[CATEGORY]]</p>
-                <h3 class="card-title">[[PROJECT THREE TITLE]]</h3>
-                <p class="card-text">[[HOME CARD ONE-LINER]]</p>
+                <p class="card-tag">Wireless Networks</p>
+                <h3 class="card-title">Underground Wireless Sensor Network</h3>
+                <p class="card-text">A low-latency fiber-wireless network for real-time data in underground mines, built for Alpha Metallurgical Resources.</p>
               </div>
             </a>
           </li>
@@ -142,14 +143,66 @@
       </div>
     </section>
 
-    <!-- 3. Experience (most recent first) -->
+    <!-- 3. Publications. Most recent first. -->
+    <!--
+      PUBLICATION TEMPLATE: copy one <li> and paste it at the top of the list.
+      Delete the .pub-links block if there is no link yet.
+
+      <li>
+        <div>
+          <h3 class="entry-title">Paper title</h3>
+          <p class="entry-org">Journal or conference</p>
+        </div>
+        <p class="entry-date">2026</p>
+        <p class="pub-authors">Author One, <strong>Colin Duckworth</strong>, Author Three</p>
+        <div class="pub-links">
+          <a class="btn btn-secondary btn-sm" href="URL" target="_blank" rel="noopener">Paper</a>
+        </div>
+      </li>
+    -->
+    <section class="section" id="publications" aria-labelledby="publications-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Publications</p>
+          <h2 class="h2" id="publications-title">Publications</h2>
+        </div>
+        <ul class="entries">
+          <li>
+            <div>
+              <h3 class="entry-title">Fractional-Order Equivalent Circuit Representation of Sucrose Solutions Electrical Impedance Measured in Bipolar Configuration</h3>
+              <p class="entry-org">IEEE SoutheastCon 2025, Concord, NC, USA</p>
+            </div>
+            <p class="entry-date">March 2025</p>
+            <p class="pub-authors"><strong>Colin L. Duckworth</strong>, Roman Sotner, Jan Jerabek, Todd J. Freeborn</p>
+            <div class="pub-links">
+              <a class="btn btn-secondary btn-sm" href="https://doi.org/10.1109/SoutheastCon56624.2025.10971635" target="_blank" rel="noopener">Paper (DOI)</a>
+              <a class="btn btn-secondary btn-sm" href="projects.html#impedance-spectroscopy">Project write-up</a>
+            </div>
+          </li>
+          <li>
+            <div>
+              <h3 class="entry-title">EPR studies of ferredoxin in spinach and cyanobacterial thylakoids related to photosystem I-driven NADP<sup>+</sup> reduction</h3>
+              <p class="entry-org">Photosynthesis Research</p>
+            </div>
+            <p class="entry-date">2024</p>
+            <p class="pub-authors">Lisa M. Utschig, <strong>Colin L. Duckworth</strong>, Jens Niklas, Oleg G. Poluektov</p>
+            <div class="pub-links">
+              <a class="btn btn-secondary btn-sm" href="https://doi.org/10.1007/s11120-023-01072-4" target="_blank" rel="noopener">Paper (DOI)</a>
+              <a class="btn btn-secondary btn-sm" href="https://pubmed.ncbi.nlm.nih.gov/38441791/" target="_blank" rel="noopener">PubMed</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 4. Experience (most recent first) -->
     <!--
       EXPERIENCE TEMPLATE: copy one <li> and paste it at the top of the list.
 
       <li>
         <div>
           <h3 class="entry-title">Role</h3>
-          <p class="entry-org">Organization</p>
+          <p class="entry-org">Organization, Location</p>
         </div>
         <p class="entry-date">Mon YYYY &ndash; Present</p>
         <ul class="entry-bullets">
@@ -166,31 +219,34 @@
         <ul class="entries">
           <li>
             <div>
-              <h3 class="entry-title">[[ROLE]]</h3>
-              <p class="entry-org">[[ORGANIZATION]]</p>
+              <h3 class="entry-title">Graduate RF Engineering Intern</h3>
+              <p class="entry-org">QuadSAT ApS, Odense, Denmark</p>
             </div>
-            <p class="entry-date">[[DATES]]</p>
+            <p class="entry-date">August 2026 &ndash; Current</p>
             <ul class="entry-bullets">
-              <li>[[BULLET: what you did, results first, with numbers where possible]]</li>
-              <li>[[BULLET]]</li>
+              <li>Leading the front-end redesign of an electronic warfare (EW) payload for spectrum monitoring across 1&ndash;18 GHz on a UAS/drone-based platform, including the implementation of a downconversion branch.</li>
+              <li>Designed custom layouts and operating procedures integrating an MCU-tunable preselector to protect against jamming in congested and hostile spectrum environments.</li>
+              <li>Transitioned the front end from connectorized components to a consolidated surface-mount layout, improving size, weight and power (SWaP) performance.</li>
             </ul>
           </li>
           <li>
             <div>
-              <h3 class="entry-title">[[ROLE]]</h3>
-              <p class="entry-org">[[ORGANIZATION]]</p>
+              <h3 class="entry-title">RF Research Assistant</h3>
+              <p class="entry-org">Remote Sensing Center, Tuscaloosa, Alabama</p>
             </div>
-            <p class="entry-date">[[DATES]]</p>
+            <p class="entry-date">August 2025 &ndash; August 2026</p>
             <ul class="entry-bullets">
-              <li>[[BULLET]]</li>
-              <li>[[BULLET]]</li>
+              <li>Owned end-to-end RF system design for FMCW radar payloads in the UHF, Ku and Ka bands, from architecture and component selection through fabrication, integration and field deployment.</li>
+              <li>Extended scope beyond RF into embedded systems and power architecture to deliver complete UAS payloads.</li>
+              <li>Applied ADS, HFSS and COMSOL simulation alongside bench characterization to integrate increasingly complex payloads that met sponsor requirements.</li>
+              <li>Took an active technical role in the ongoing joint effort with the Alfred Wegener Institute.</li>
             </ul>
           </li>
         </ul>
       </div>
     </section>
 
-    <!-- 4. Education (most recent first). Delete any detail line you do not need. -->
+    <!-- 5. Education (most recent first) -->
     <section class="section" id="education" aria-labelledby="education-title">
       <div class="container">
         <div class="section-head">
@@ -200,22 +256,20 @@
         <ul class="entries">
           <li>
             <div>
-              <h3 class="entry-title">[[DEGREE, MAJOR / MINOR]]</h3>
-              <p class="entry-org">[[INSTITUTION]]</p>
+              <h3 class="entry-title">B.S. in Electrical Engineering</h3>
+              <p class="entry-org">The University of Alabama, Tuscaloosa, Alabama</p>
             </div>
-            <p class="entry-date">[[DATES]]</p>
+            <p class="entry-date">Graduated May 2026</p>
             <ul class="entry-details">
-              <li>GPA: [[GPA]]</li>
-              <li>Honors: [[HONORS]]</li>
-              <li>Thesis / advisor: [[THESIS TITLE, ADVISOR]]</li>
-              <li>Relevant coursework: [[COURSES]]</li>
+              <li>GPA: 3.8 / 4.0</li>
+              <li>Honors: 4&times; President&rsquo;s List, 7&times; Dean&rsquo;s List</li>
             </ul>
           </li>
         </ul>
       </div>
     </section>
 
-    <!-- 5. About -->
+    <!-- 6. About -->
     <section class="section" id="about" aria-labelledby="about-title">
       <div class="container">
         <div class="section-head">
@@ -223,31 +277,29 @@
           <h2 class="h2" id="about-title">About Me</h2>
         </div>
         <div class="lead prose">
-          <p>[[ABOUT PARAGRAPH 1]]</p>
-          <p>[[ABOUT PARAGRAPH 2]]</p>
-          <p>[[ABOUT PARAGRAPH 3]]</p>
+          <p>I&rsquo;m an electrical engineer focused on RF and microwave systems. I graduated from The University of Alabama in May 2026 with a B.S. in Electrical Engineering, and I now work as a graduate RF engineering intern at QuadSAT in Odense, Denmark.</p>
+          <p>Most of my work is radar hardware for remote sensing: taking an RF system from architecture and component selection through PCB fabrication, integration and field deployment on UAS platforms, across the UHF, Ku and Ka bands. I also work on the embedded control and power electronics that turn an RF chain into a complete payload.</p>
+          <p>My advisors are Dr. Prasad Gogineni and Dr. Todd Freeborn.</p>
         </div>
         <ul class="stats">
-          <li class="stat"><span class="stat-num">[[NUMBER]]</span><span class="stat-label">[[LABEL]]</span></li>
-          <li class="stat"><span class="stat-num">[[NUMBER]]</span><span class="stat-label">[[LABEL]]</span></li>
-          <li class="stat"><span class="stat-num">[[NUMBER]]</span><span class="stat-label">[[LABEL]]</span></li>
+          <li class="stat"><span class="stat-num">3.8</span><span class="stat-label">GPA, out of 4.0</span></li>
+          <li class="stat"><span class="stat-num">4&times;</span><span class="stat-label">President&rsquo;s List</span></li>
+          <li class="stat"><span class="stat-num">7&times;</span><span class="stat-label">Dean&rsquo;s List</span></li>
         </ul>
       </div>
     </section>
 
-    <!-- 6. Contact. Delete any link you do not have. -->
+    <!-- 7. Contact. Add a GitHub or Google Scholar / ORCID link here (and in the footer) when you have one. -->
     <section class="section" id="contact" aria-labelledby="contact-title">
       <div class="container">
         <div class="section-head">
           <p class="eyebrow">Say Hello</p>
           <h2 class="h2" id="contact-title">Get in Touch</h2>
         </div>
-        <p class="lead">[[CONTACT LINE: what you are open to, e.g. research collaborations and full-time roles.]]</p>
+        <p class="lead">I am seeking full-time opportunities starting in January 2027, and MS/PhD positions in radar system development, SDR design or RFIC design starting in fall 2027.</p>
         <div class="contact-links">
-          <a href="mailto:[[EMAIL]]">[[EMAIL]]</a>
-          <a href="[[LINKEDIN URL]]" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="[[GITHUB URL]]" target="_blank" rel="noopener">GitHub</a>
-          <a href="[[SCHOLAR OR ORCID URL]]" target="_blank" rel="noopener">Google Scholar / ORCID</a>
+          <a href="mailto:clduckworth@crimson.ua.edu">clduckworth@crimson.ua.edu</a>
+          <a href="https://www.linkedin.com/in/colin-duckworth/" target="_blank" rel="noopener">LinkedIn</a>
         </div>
       </div>
     </section>
@@ -256,12 +308,10 @@
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <p>[[FULL NAME]] &mdash; <span data-year>2026</span></p>
+      <p>Colin Duckworth &mdash; <span data-year>2026</span></p>
       <ul class="footer-links">
-        <li><a href="mailto:[[EMAIL]]">Email</a></li>
-        <li><a href="[[LINKEDIN URL]]" target="_blank" rel="noopener">LinkedIn</a></li>
-        <li><a href="[[GITHUB URL]]" target="_blank" rel="noopener">GitHub</a></li>
-        <li><a href="[[SCHOLAR OR ORCID URL]]" target="_blank" rel="noopener">Scholar</a></li>
+        <li><a href="mailto:clduckworth@crimson.ua.edu">Email</a></li>
+        <li><a href="https://www.linkedin.com/in/colin-duckworth/" target="_blank" rel="noopener">LinkedIn</a></li>
       </ul>
     </div>
   </footer>

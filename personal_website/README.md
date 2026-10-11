@@ -165,6 +165,8 @@ site serves `/var/www/html`, not our web root.
 | 8 | `<hostname>.local` does not resolve from the laptop | mDNS does not cross WSL2's NAT | `ping <hostname>.local` fails; IP works | Use the IP (`PI_ADDRESS`), or a Pi-hole Local DNS record |
 | 9 | The home page scrolls sideways on a phone (556px of content in a 320px viewport). **Hit on this build** | A grid track written as `1fr` cannot shrink below its content's minimum width, so one long unbreakable string (here the placeholder `[[NUMBER]]`) widened the whole page | In the browser at 320px: `document.documentElement.scrollWidth` exceeds the viewport; listing elements whose right edge passes it pointed at `.stat` | `minmax(0, 1fr)` in every grid, and `overflow-wrap` on text. A real email address or URL would have done the same |
 | 10 | A 375px headless screenshot looks cropped on the right | Headless Edge/Chrome will not make a window narrower than about 500px, so the shot is a wider layout cut to 375px | Text is cut mid-word while `scrollWidth` reports no overflow | Show the page in a 375px `<iframe>` inside a wider window and screenshot that |
+| 11 | A project brief PDF was dropped into `site/assets/` along with the images. **Caught before deploying** | Everything under `site/` is published by `deploy.sh`, at a guessable URL, whether or not any page links to it | `ls site/assets` and `git status` before deploying; the file is not referenced by any page | Keep working files outside `site/` (here `personal_website/source-material/`), and put only what should be public in `site/` |
+| 12 | `*.png:Zone.Identifier` files appear next to images copied from Windows | NTFS stores a download-origin marker as an alternate data stream; WSL shows it as a separate file | `ls -la` shows the `:Zone.Identifier` name; contents are `[ZoneTransfer] ZoneId=3` | Delete them. They would otherwise be rsynced to the server |
 
 Logs: `/var/log/nginx/access.log` (every request) and `error.log` (why a request
 failed). Watching `access.log` while loading the page is the clearest view of
@@ -208,7 +210,14 @@ Decisions that come before the site is reachable from outside the LAN:
 - [x] Portfolio template built: home, projects, 404, one stylesheet, one script
 - [x] Checked in Edge at 320 / 375 / 768 / 1024 / 1440 px: no horizontal scroll, expected grid columns, 44px tap targets, mobile menu, lightbox, deep links clear the sticky header, no console messages
 - [ ] Custom 404 page live: reinstall the nginx config (see [`EDITING.md`](EDITING.md#one-time-the-custom-404-page))
-- [ ] Real content (`grep -rn '\[\[' site` prints nothing)
+- [x] Content from the resume: six projects (three featured), experience, education, about, publications section
+- [x] Publications (two) and the impedance-spectroscopy and Z3U write-ups filled in from the papers and the (private) `SDR_rx_power` repo
+- [ ] Pluto SDR project: description and bullets are **stand-in filler** (marked `FILLER` in `projects.html`); replace with the real scope
+- [ ] Capstone final report (`assets/capstone-final-report.pdf`): confirm it may be public (it names Alpha's mine, a test date and results against Alpha's requirements), and that its PDF author metadata is what you want shown
+- [ ] Z3U write-up: confirm QuadSAT is happy for it to be public before the site leaves the LAN (it describes work from a private employer repo)
+- [x] Real images: headshot, USGS RF chain and control/power diagrams, AWI system photo and block diagram
+- [x] Real resume PDF in `site/assets/colin-duckworth-resume.pdf`
+- [ ] Remaining `[[...]]` placeholders filled (`grep -rn '\[\[' site` prints nothing): images and captions for the Z3U and Pluto SDR projects, the fourth USGS photo, and the domain
 - [ ] Lighthouse scores (not run: it needs DevTools or CI)
 - [ ] Escape key and a screen reader tried by hand (the harness synthesised events; native `<dialog>` handles Escape)
 - [ ] LAN name via Pi-hole Local DNS

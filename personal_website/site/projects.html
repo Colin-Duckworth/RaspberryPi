@@ -3,19 +3,19 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Projects | [[FULL NAME]]</title>
-  <meta name="description" content="Projects by [[FULL NAME]]: [[ONE SENTENCE ON THE KINDS OF WORK SHOWN HERE]]">
+  <title>Projects | Colin Duckworth</title>
+  <meta name="description" content="Projects by Colin Duckworth: radar hardware, RF measurement and wireless networks, from design through field deployment.">
   <link rel="canonical" href="https://[[DOMAIN]]/projects.html">
   <meta name="theme-color" content="#ffffff">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Projects | [[FULL NAME]]">
-  <meta property="og:description" content="[[ONE SENTENCE ON THE KINDS OF WORK SHOWN HERE]]">
+  <meta property="og:title" content="Projects | Colin Duckworth">
+  <meta property="og:description" content="Radar hardware, RF measurement and wireless networks, from design through field deployment.">
   <meta property="og:url" content="https://[[DOMAIN]]/projects.html">
   <meta property="og:image" content="https://[[DOMAIN]]/images/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Projects | [[FULL NAME]]">
-  <meta name="twitter:description" content="[[ONE SENTENCE ON THE KINDS OF WORK SHOWN HERE]]">
+  <meta name="twitter:title" content="Projects | Colin Duckworth">
+  <meta name="twitter:description" content="Radar hardware, RF measurement and wireless networks, from design through field deployment.">
   <meta name="twitter:image" content="https://[[DOMAIN]]/images/og-image.png">
 
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -32,13 +32,14 @@
 
   <header class="site-header">
     <div class="container nav">
-      <a class="brand" href="index.html">[[SHORT NAME]]</a>
+      <a class="brand" href="index.html">Colin D.</a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="Open menu">
         <span class="nav-toggle-bar" aria-hidden="true"></span>
       </button>
       <nav class="nav-menu" id="site-menu" aria-label="Primary">
         <ul class="nav-links">
           <li><a href="projects.html" aria-current="page">Projects</a></li>
+          <li><a href="index.html#publications">Publications</a></li>
           <li><a href="index.html#experience">Experience</a></li>
           <li><a href="index.html#education">Education</a></li>
           <li><a href="index.html#about">About</a></li>
@@ -53,7 +54,7 @@
     <header class="container page-header">
       <p class="eyebrow">Work</p>
       <h1>All Projects</h1>
-      <p class="lead">[[SUBTITLE: one line on the kinds of projects collected here.]]</p>
+      <p class="lead">Radar hardware, RF measurement and wireless networks, from first architecture to field deployment.</p>
     </header>
 
     <!-- TIER 1: flagship projects. Full write-ups, stacked. -->
@@ -63,15 +64,18 @@
         - The id is the project's URL slug: lowercase, hyphens, unique. The
           home page card links to projects.html#<this id>.
         - Keep aria-labelledby equal to the id of the h2 inside.
-        - Delete any button in .project-links that you have no link for.
+        - Delete any button in .project-links that you have no link for, and
+          the whole .project-links div if there are none.
         - Put images in images/projects/<slug>/. Every image needs a real
           width, height and alt text. The link around it is the full-size file.
+        - To mark a project as in progress, add the first tag shown below.
 
       <article class="project" id="your-project-slug" aria-labelledby="your-project-slug-title">
         <p class="eyebrow">Category</p>
         <h2 id="your-project-slug-title">Project title</h2>
         <p class="project-context">Organization, lab, course or client. Mon YYYY to Mon YYYY</p>
         <ul class="tags">
+          <li class="tag tag-status">In progress</li>
           <li class="tag">Tool</li>
         </ul>
         <p class="project-description">Two to four sentences on the problem and what you built.</p>
@@ -97,105 +101,222 @@
     -->
     <section class="container flagship" aria-label="Flagship projects">
 
-      <article class="project" id="project-one" aria-labelledby="project-one-title">
-        <p class="eyebrow">[[CATEGORY]]</p>
-        <h2 id="project-one-title">[[PROJECT ONE TITLE]]</h2>
-        <p class="project-context">[[ORGANIZATION / LAB / COURSE / CLIENT]], [[DATES]]</p>
+      <article class="project" id="usgs-hydrology-radar" aria-labelledby="usgs-hydrology-radar-title">
+        <p class="eyebrow">Radar Hardware</p>
+        <h2 id="usgs-hydrology-radar-title">VHF/UHF Hydrology Radar Hardware Design</h2>
+        <p class="project-context">RF lead &middot; USGS river mapping &middot; May 2026 &ndash; August 2026</p>
         <ul class="tags">
-          <li class="tag">[[TOOL]]</li>
-          <li class="tag">[[TOOL]]</li>
-          <li class="tag">[[TOOL]]</li>
+          <li class="tag">FMCW radar</li>
+          <li class="tag">40&ndash;600 MHz</li>
+          <li class="tag">Keysight ADS</li>
+          <li class="tag">RF PCB</li>
+          <li class="tag">RFSoC</li>
+          <li class="tag">UAS payload</li>
         </ul>
-        <p class="project-description">[[DESCRIPTION: two to four sentences on the problem and what you built.]]</p>
+        <p class="project-description">RF lead for a team designing a 40&ndash;600 MHz FMCW radar payload for USGS river mapping, driving the RF architecture from design through integration and field deployment.</p>
         <ul class="project-points">
-          <li>[[BULLET: results first, with numbers where possible]]</li>
-          <li>[[BULLET]]</li>
-          <li>[[BULLET]]</li>
+          <li>Field-deployed in August 2026: an 18 lb payload integrated onto an in-house-built UAS with a 40 lb capacity.</li>
+          <li>Designed custom components and RF PCBs in Keysight ADS and fabricated the layouts in house.</li>
+          <li>Developed an AD8302-based reflection-cancellation circuit so one antenna can share transmit and receive.</li>
+          <li>Engineered the embedded control and power architecture (RFSoC + MCU) for RF-chain switching and LDO sequencing.</li>
+          <li>Led the RF chain integration.</li>
         </ul>
-        <div class="project-links">
-          <a class="btn btn-secondary btn-sm" href="[[PAPER URL]]" target="_blank" rel="noopener">Paper</a>
-          <a class="btn btn-secondary btn-sm" href="[[POSTER URL]]" target="_blank" rel="noopener">Poster</a>
-          <a class="btn btn-secondary btn-sm" href="[[CODE URL]]" target="_blank" rel="noopener">Code</a>
-          <a class="btn btn-secondary btn-sm" href="[[DEMO URL]]" target="_blank" rel="noopener">Demo</a>
-        </div>
         <div class="gallery">
           <figure>
-            <a class="gallery-link" href="images/placeholder-16x10.svg" data-lightbox>
-              <img src="images/placeholder-16x10.svg" width="1600" height="1000" loading="lazy" alt="[[ALT TEXT: figure 1 of project one]]">
+            <a class="gallery-link" href="images/projects/usgs-hydrology-radar/rf-chain.jpg" data-lightbox>
+              <img class="fit-contain" src="images/projects/usgs-hydrology-radar/rf-chain.jpg" width="1100" height="690" loading="lazy" alt="Block diagram of the hydrology radar RF chain: RFSoC transmit and receive paths, hybrids, a directional coupler feeding an AD8302 reflection-cancellation circuit, and an SP6T switch to the antenna and SOL standards">
             </a>
-            <figcaption>[[CAPTION]]</figcaption>
+            <figcaption>RF chain: RFSoC transmit and receive paths, the AD8302-based reflection-cancellation circuit, and an SP6T switch to the antenna and SOL calibration standards.</figcaption>
           </figure>
           <figure>
+            <a class="gallery-link" href="images/projects/usgs-hydrology-radar/control-and-power.png" data-lightbox>
+              <img class="fit-contain" src="images/projects/usgs-hydrology-radar/control-and-power.png" width="848" height="688" loading="lazy" alt="Two diagrams: control signals between the AD8302, an Arduino, a level shifter to the RFSoC and the RF switches, and power flow from a 24 V battery through 12 V, 9 V and 5 V rails">
+            </a>
+            <figcaption>Control signals and power flow: an Arduino reads the AD8302 and drives the RF switches, with a 24 V battery feeding 12 V, 9 V and 5 V rails.</figcaption>
+          </figure>
+          <figure>
+            <a class="gallery-link" href="images/projects/usgs-hydrology-radar/bench-test.jpg" data-lightbox>
+              <img class="crop-upper" src="images/projects/usgs-hydrology-radar/bench-test.jpg" width="1200" height="1600" loading="lazy" alt="Overhead view of the RF chain bench test: two Mini-Circuits switches on a protoboard, hybrids labelled 3HY1 and 3HY2, a gold RF board, amplifiers on heat sinks, an AD8302 shield and a level-shifter board, joined by blue semi-rigid cables on a taped-off bench">
+            </a>
+            <figcaption>Bench test of the RF chain: switches, hybrids, amplifiers, the AD8302 board and the level shifter wired together on the bench.</figcaption>
+          </figure>
+          <!-- PLACEHOLDER: fourth photo for this project. Swap in the real image,
+               alt text and caption, or delete this figure. -->
+          <figure>
             <a class="gallery-link" href="images/placeholder-16x10.svg" data-lightbox>
-              <img src="images/placeholder-16x10.svg" width="1600" height="1000" loading="lazy" alt="[[ALT TEXT: figure 2 of project one]]">
+              <img src="images/placeholder-16x10.svg" width="1600" height="1000" loading="lazy" alt="[[ALT TEXT: figure 4 of the hydrology radar project]]">
             </a>
             <figcaption>[[CAPTION]]</figcaption>
           </figure>
         </div>
       </article>
 
-      <article class="project" id="project-two" aria-labelledby="project-two-title">
-        <p class="eyebrow">[[CATEGORY]]</p>
-        <h2 id="project-two-title">[[PROJECT TWO TITLE]]</h2>
-        <p class="project-context">[[ORGANIZATION / LAB / COURSE / CLIENT]], [[DATES]]</p>
+      <article class="project" id="quadsat-z3u-noise-study" aria-labelledby="quadsat-z3u-noise-study-title">
+        <p class="eyebrow">Noise Study</p>
+        <h2 id="quadsat-z3u-noise-study-title">QuadSAT Z3U Noise Study</h2>
+        <p class="project-context">QuadSAT ApS, Odense, Denmark &middot; September 2026 &ndash; present</p>
         <ul class="tags">
-          <li class="tag">[[TOOL]]</li>
-          <li class="tag">[[TOOL]]</li>
+          <li class="tag">C</li>
+          <li class="tag">Epiq Sidekiq SDK</li>
+          <li class="tag">Matchstiq Z3u</li>
+          <li class="tag">MATLAB</li>
+          <li class="tag">Y-factor method</li>
+          <li class="tag">aarch64 cross-compiling</li>
         </ul>
-        <p class="project-description">[[DESCRIPTION]]</p>
+        <p class="project-description">Built the measurement chain for QuadSAT&rsquo;s SDR noise study: a C tool that reads average receive power from an Epiq Matchstiq Z3u software-defined radio, and MATLAB analysis that turns hot and cold noise-source sweeps into a noise-figure estimate with the Y-factor method.</p>
         <ul class="project-points">
-          <li>[[BULLET]]</li>
-          <li>[[BULLET]]</li>
-          <li>[[BULLET]]</li>
+          <li>Terminated-port noise power reads about &minus;102 to &minus;103 dBm in an 8 MHz bandwidth, close to the roughly &minus;105 dBm thermal floor; used as the sanity check on the whole chain, calibration sign included.</li>
+          <li>Frequency-sweep tool writes each run to CSV with a configuration header, so the analysis refuses to compare hot and cold sweeps taken with different gain, bandwidth or sample settings.</li>
+          <li>Noise figure follows the Y-factor method, with guards that stop the analysis instead of printing a number when the two sweeps do not match or the Y-factor is too small to trust, and a self-test on synthetic data.</li>
+          <li>Found and fixed a configuration bug that made the second receive channel return only zeros (the RFIC must be put in dual-channel mode), and a pointer bug inherited from the SDK example that discarded the first IQ pairs of every block.</li>
+          <li>Measured how long the reading takes to settle at each gain (under 1 ms at high gain, up to about 10 ms at low gain) and set the defaults for settling time and sample count from it.</li>
         </ul>
-        <div class="project-links">
-          <a class="btn btn-secondary btn-sm" href="[[CODE URL]]" target="_blank" rel="noopener">Code</a>
-          <a class="btn btn-secondary btn-sm" href="[[SLIDES URL]]" target="_blank" rel="noopener">Slides</a>
-        </div>
+        <!-- No Code button: the repository is private. -->
         <div class="gallery">
           <figure>
             <a class="gallery-link" href="images/placeholder-16x10.svg" data-lightbox>
-              <img src="images/placeholder-16x10.svg" width="1600" height="1000" loading="lazy" alt="[[ALT TEXT: figure 1 of project two]]">
+              <img src="images/placeholder-16x10.svg" width="1600" height="1000" loading="lazy" alt="[[ALT TEXT: figure 1 of the Z3U noise study]]">
             </a>
             <figcaption>[[CAPTION]]</figcaption>
           </figure>
           <figure>
             <a class="gallery-link" href="images/placeholder-16x10.svg" data-lightbox>
-              <img src="images/placeholder-16x10.svg" width="1600" height="1000" loading="lazy" alt="[[ALT TEXT: figure 2 of project two]]">
+              <img src="images/placeholder-16x10.svg" width="1600" height="1000" loading="lazy" alt="[[ALT TEXT: figure 2 of the Z3U noise study]]">
             </a>
             <figcaption>[[CAPTION]]</figcaption>
           </figure>
         </div>
       </article>
 
-      <article class="project" id="project-three" aria-labelledby="project-three-title">
-        <p class="eyebrow">[[CATEGORY]]</p>
-        <h2 id="project-three-title">[[PROJECT THREE TITLE]]</h2>
-        <p class="project-context">[[ORGANIZATION / LAB / COURSE / CLIENT]], [[DATES]]</p>
+      <article class="project" id="underground-sensor-network" aria-labelledby="underground-sensor-network-title">
+        <p class="eyebrow">Wireless Networks</p>
+        <h2 id="underground-sensor-network-title">Underground Wireless Sensor Network for Mining Operations</h2>
+        <p class="project-context">Senior Capstone for Alpha Metallurgical Resources, The University of Alabama &middot; August 2025 &ndash; April 2026</p>
         <ul class="tags">
-          <li class="tag">[[TOOL]]</li>
-          <li class="tag">[[TOOL]]</li>
+          <li class="tag">Ansys HFSS</li>
+          <li class="tag">Sionna RT</li>
+          <li class="tag">IEEE 802.11</li>
+          <li class="tag">IPv4 static routing</li>
+          <li class="tag">Fiber backhaul</li>
         </ul>
-        <p class="project-description">[[DESCRIPTION]]</p>
+        <p class="project-description">Contracted by Alpha Metallurgical Resources, through UA&rsquo;s new Senior Capstone initiative, to design a wireless sensor network for real-time data transfer in underground mining environments. The network is platform agnostic, for future use in thermography and personnel tracking.</p>
         <ul class="project-points">
-          <li>[[BULLET]]</li>
-          <li>[[BULLET]]</li>
-          <li>[[BULLET]]</li>
+          <li>Developed a low-latency (&lt;50 ms), high-throughput (10 Mbps surge), platform-agnostic wireless network with Alpha&rsquo;s engineering team and university faculty.</li>
+          <li>Evaluated signal propagation in a mine environment with various antennas in Ansys HFSS, and ran Sionna RT ray tracing to assess multipath reflections and channel responses.</li>
+          <li>Designed a fiber-wireless network: point-to-point IEEE 802.11 at Layer 2, IPv4 static routing at Layer 3, and a fiber downlink from the control room to the head of the underground sensor daisy chain for reliable backhaul.</li>
         </ul>
         <div class="project-links">
-          <a class="btn btn-secondary btn-sm" href="[[PAPER URL]]" target="_blank" rel="noopener">Paper</a>
-          <a class="btn btn-secondary btn-sm" href="[[POSTER URL]]" target="_blank" rel="noopener">Poster</a>
+          <a class="btn btn-secondary btn-sm" href="assets/capstone-final-report.pdf" target="_blank" rel="noopener">Final report (PDF)</a>
         </div>
         <div class="gallery">
           <figure>
-            <a class="gallery-link" href="images/placeholder-16x10.svg" data-lightbox>
-              <img src="images/placeholder-16x10.svg" width="1600" height="1000" loading="lazy" alt="[[ALT TEXT: figure 1 of project three]]">
+            <a class="gallery-link" href="images/projects/underground-sensor-network/field-test.jpg" data-lightbox>
+              <img src="images/projects/underground-sensor-network/field-test.jpg" width="1600" height="1200" loading="lazy" alt="An engineer stands in an underground mine entry holding a laptop, beside a tripod-mounted flat panel antenna and a blue equipment bag, with a belt-head sign behind them">
             </a>
-            <figcaption>[[CAPTION]]</figcaption>
+            <figcaption>Testing the wireless link underground, with a panel antenna on a tripod and a laptop.</figcaption>
           </figure>
           <figure>
+            <a class="gallery-link" href="images/projects/underground-sensor-network/team-in-mine.jpg" data-lightbox>
+              <img src="images/projects/underground-sensor-network/team-in-mine.jpg" width="1600" height="1200" loading="lazy" alt="Four members of the capstone team in white coveralls, hard hats and headlamps, smiling in an underground mine with a mining machine's cutting drum behind them">
+            </a>
+            <figcaption>The capstone team underground at the mine.</figcaption>
+          </figure>
+        </div>
+      </article>
+
+      <article class="project" id="ku-ka-glaciology-radar" aria-labelledby="ku-ka-glaciology-radar-title">
+        <p class="eyebrow">Radar Hardware</p>
+        <h2 id="ku-ka-glaciology-radar-title">Ku/Ka-Band Glaciology Radar Front-End Design</h2>
+        <p class="project-context">Joint effort with the Alfred Wegener Institute (AWI) &middot; August 2025 &ndash; May 2026</p>
+        <ul class="tags">
+          <li class="tag">FMCW radar</li>
+          <li class="tag">Ku-band</li>
+          <li class="tag">Ka-band</li>
+          <li class="tag">Polarimetric</li>
+          <li class="tag">Microwave PCB</li>
+          <li class="tag">UAS</li>
+        </ul>
+        <p class="project-description">Developed the microwave TX/RX signal chain for a UAS-based polarimetric FMCW radar system, as part of a university research grant enabling remote sensing in arctic environments.</p>
+        <ul class="project-points">
+          <li>10 dBm dual-band transmit chain covering 12&ndash;18 GHz and 32&ndash;38 GHz.</li>
+          <li>Selected and integrated the FMCW architecture components.</li>
+          <li>Designed, fabricated and characterized custom microwave PCBs for RF-chain integration and antenna design.</li>
+        </ul>
+        <div class="gallery">
+          <figure>
+            <a class="gallery-link" href="images/projects/ku-ka-glaciology-radar/full-system.jpg" data-lightbox>
+              <img src="images/projects/ku-ka-glaciology-radar/full-system.jpg" width="1024" height="768" loading="lazy" alt="A multirotor UAS standing on landing legs on a lawn, with the radar payload mounted beneath it">
+            </a>
+            <figcaption>The full system on the lawn, with the radar payload mounted beneath the UAS.</figcaption>
+          </figure>
+          <figure>
+            <a class="gallery-link" href="images/projects/ku-ka-glaciology-radar/block-diagram.jpg" data-lightbox>
+              <img class="fit-contain" src="images/projects/ku-ka-glaciology-radar/block-diagram.jpg" width="766" height="897" loading="lazy" alt="Block diagram of the dual-band radar: a Ku-band chain above a Ka-band chain, each with a transmit chain and vertically and horizontally polarized receiver modules, sharing a digital system with AWG, A/D and storage">
+            </a>
+            <figcaption>Dual-band system block diagram: Ku- and Ka-band transmit chains, V and H polarized receiver modules, and the shared digital system.</figcaption>
+          </figure>
+        </div>
+      </article>
+
+      <article class="project" id="impedance-spectroscopy" aria-labelledby="impedance-spectroscopy-title">
+        <p class="eyebrow">Impedance Spectroscopy</p>
+        <h2 id="impedance-spectroscopy-title">Fractional-Order Circuit Model of Sucrose Solution Impedance</h2>
+        <p class="project-context">With Roman Sotner, Jan Jerabek and Todd J. Freeborn &middot; Published at IEEE SoutheastCon 2025</p>
+        <ul class="tags">
+          <li class="tag">Impedance spectroscopy</li>
+          <li class="tag">Fractional-order modeling</li>
+          <li class="tag">Particle swarm optimization</li>
+          <li class="tag">MATLAB</li>
+          <li class="tag">Keysight E4990A</li>
+        </ul>
+        <p class="project-description">Investigated how adding sucrose, up to 785 mM, to a liquid (unsweetened FuzeTea) changes its electrical impedance, as a possible method for food quality monitoring. Impedance was measured from 100 Hz to 1 MHz with gold and platinum electrodes, and a fractional-order equivalent circuit was fit to the data by numerical optimization.</p>
+        <ul class="project-points">
+          <li>The fitted model reproduced the measurements to within 2% in impedance magnitude and 6% in phase.</li>
+          <li>The liquid-resistance parameter roughly doubled as sucrose rose from 0 to 785 mM (from about 750 &Omega; to about 1.5 k&Omega;), making it a candidate marker for sucrose adulterants.</li>
+          <li>Fit the gold and platinum datasets simultaneously with MATLAB particle swarm optimization, to separate the liquid&rsquo;s behaviour from the electrode interface.</li>
+          <li>The results suggest the model can be simplified by dropping the interface loss terms, since the fractional-order element already captures them.</li>
+        </ul>
+        <div class="project-links">
+          <a class="btn btn-secondary btn-sm" href="https://doi.org/10.1109/SoutheastCon56624.2025.10971635" target="_blank" rel="noopener">Paper</a>
+        </div>
+        <div class="gallery">
+          <figure>
+            <a class="gallery-link" href="images/projects/impedance-spectroscopy/setup-diagram.png" data-lightbox>
+              <img class="fit-contain" src="images/projects/impedance-spectroscopy/setup-diagram.png" width="1600" height="1000" loading="lazy" alt="Diagram of the measurement setup: a Keysight 42941A probe with prongs 4 mm apart, submerged 10 mm into 20 mL of solution in a 25 mL beaker, with cables running to a Keysight impedance analyzer">
+            </a>
+            <figcaption>Measurement setup: the probe&rsquo;s prongs, 4 mm apart, sit 10 mm deep in 20 mL of solution and connect to the Keysight impedance analyzer. Figure from the SoutheastCon 2025 paper.</figcaption>
+          </figure>
+          <figure>
+            <a class="gallery-link" href="images/projects/impedance-spectroscopy/experiment-brno.jpg" data-lightbox>
+              <img class="crop-upper" src="images/projects/impedance-spectroscopy/experiment-brno.jpg" width="1200" height="1600" loading="lazy" alt="Colin, in black gloves, positioning an electrode probe held on a stand over a beaker of solution, with an impedance analyzer and laptop beside him in a university lab">
+            </a>
+            <figcaption>Running the impedance measurements in the lab in Brno.</figcaption>
+          </figure>
+        </div>
+      </article>
+
+      <article class="project" id="pulsed-doppler-pluto-sdr" aria-labelledby="pulsed-doppler-pluto-sdr-title">
+        <p class="eyebrow">Radar / SDR</p>
+        <h2 id="pulsed-doppler-pluto-sdr-title">Pulsed Doppler Radar on Pluto SDR</h2>
+        <p class="project-context">Independent project &middot; in progress</p>
+        <!-- FILLER: the description and bullets below are stand-in copy written
+             without details from the author. Replace them with the real scope. -->
+        <ul class="tags">
+          <li class="tag tag-status">In progress</li>
+          <li class="tag">Pulsed Doppler radar</li>
+          <li class="tag">Pluto SDR</li>
+          <li class="tag">Signal processing</li>
+        </ul>
+        <p class="project-description">A pulsed Doppler radar built on a Pluto software-defined radio, to explore how pulse timing, matched filtering and Doppler processing turn raw IQ samples into range and velocity.</p>
+        <ul class="project-points">
+          <li>Aim: generate and receive pulsed waveforms with the Pluto&rsquo;s transmit and receive chains.</li>
+          <li>Aim: apply matched filtering and Doppler processing to estimate range and radial velocity.</li>
+          <li>Next: test against a moving target and characterize range resolution and velocity accuracy.</li>
+        </ul>
+        <div class="gallery">
+          <figure>
             <a class="gallery-link" href="images/placeholder-16x10.svg" data-lightbox>
-              <img src="images/placeholder-16x10.svg" width="1600" height="1000" loading="lazy" alt="[[ALT TEXT: figure 2 of project three]]">
+              <img src="images/placeholder-16x10.svg" width="1600" height="1000" loading="lazy" alt="[[ALT TEXT: figure 1 of the pulsed Doppler radar]]">
             </a>
             <figcaption>[[CAPTION]]</figcaption>
           </figure>
@@ -204,28 +325,10 @@
 
     </section>
 
-    <!-- TIER 2: smaller projects. Compact cards, no images, grouped by category. -->
-    <!--
-      TIER 2 TEMPLATE: copy one <li> into an existing group's list. To add a
-      new category, copy a whole <div class="group"> block and rename it.
+    <!-- TIER 2: smaller projects. Compact cards with no images, grouped by
+         category. None yet, so the section is not shown. To bring it back,
+         uncomment the block below and fill it in.
 
-      <li>
-        <article class="card">
-          <div class="card-body">
-            <p class="card-tag">Category</p>
-            <h4 class="card-title">Project title</h4>
-            <p class="card-text">Two or three sentences.</p>
-            <ul class="tags">
-              <li class="tag">Tool</li>
-            </ul>
-            <div class="card-links">
-              <a class="btn btn-secondary btn-sm" href="URL" target="_blank" rel="noopener">Code</a>
-              <a class="btn btn-secondary btn-sm" href="URL" target="_blank" rel="noopener">Paper</a>
-            </div>
-          </div>
-        </article>
-      </li>
-    -->
     <section class="section" aria-labelledby="more-title">
       <div class="container">
         <div class="section-head">
@@ -234,82 +337,21 @@
         </div>
 
         <div class="group">
-          <h3 class="group-title">[[CATEGORY A]]</h3>
+          <h3 class="group-title">Category name</h3>
           <ul class="card-grid card-grid-3">
             <li>
               <article class="card">
                 <div class="card-body">
-                  <p class="card-tag">[[CATEGORY A]]</p>
-                  <h4 class="card-title">[[PROJECT TITLE]]</h4>
-                  <p class="card-text">[[DESCRIPTION: two or three sentences.]]</p>
+                  <p class="card-tag">Category name</p>
+                  <h4 class="card-title">Project title</h4>
+                  <p class="card-text">Two or three sentences.</p>
                   <ul class="tags">
-                    <li class="tag">[[TOOL]]</li>
-                    <li class="tag">[[TOOL]]</li>
+                    <li class="tag">Tool</li>
                   </ul>
                   <div class="card-links">
-                    <a class="btn btn-secondary btn-sm" href="[[CODE URL]]" target="_blank" rel="noopener">Code</a>
+                    <a class="btn btn-secondary btn-sm" href="URL" target="_blank" rel="noopener">Code</a>
+                    <a class="btn btn-secondary btn-sm" href="URL" target="_blank" rel="noopener">Paper</a>
                   </div>
-                </div>
-              </article>
-            </li>
-            <li>
-              <article class="card">
-                <div class="card-body">
-                  <p class="card-tag">[[CATEGORY A]]</p>
-                  <h4 class="card-title">[[PROJECT TITLE]]</h4>
-                  <p class="card-text">[[DESCRIPTION]]</p>
-                  <ul class="tags">
-                    <li class="tag">[[TOOL]]</li>
-                  </ul>
-                  <div class="card-links">
-                    <a class="btn btn-secondary btn-sm" href="[[CODE URL]]" target="_blank" rel="noopener">Code</a>
-                    <a class="btn btn-secondary btn-sm" href="[[PAPER URL]]" target="_blank" rel="noopener">Paper</a>
-                  </div>
-                </div>
-              </article>
-            </li>
-            <li>
-              <article class="card">
-                <div class="card-body">
-                  <p class="card-tag">[[CATEGORY A]]</p>
-                  <h4 class="card-title">[[PROJECT TITLE]]</h4>
-                  <p class="card-text">[[DESCRIPTION]]</p>
-                  <ul class="tags">
-                    <li class="tag">[[TOOL]]</li>
-                  </ul>
-                </div>
-              </article>
-            </li>
-          </ul>
-        </div>
-
-        <div class="group">
-          <h3 class="group-title">[[CATEGORY B]]</h3>
-          <ul class="card-grid card-grid-3">
-            <li>
-              <article class="card">
-                <div class="card-body">
-                  <p class="card-tag">[[CATEGORY B]]</p>
-                  <h4 class="card-title">[[PROJECT TITLE]]</h4>
-                  <p class="card-text">[[DESCRIPTION]]</p>
-                  <ul class="tags">
-                    <li class="tag">[[TOOL]]</li>
-                  </ul>
-                  <div class="card-links">
-                    <a class="btn btn-secondary btn-sm" href="[[CODE URL]]" target="_blank" rel="noopener">Code</a>
-                  </div>
-                </div>
-              </article>
-            </li>
-            <li>
-              <article class="card">
-                <div class="card-body">
-                  <p class="card-tag">[[CATEGORY B]]</p>
-                  <h4 class="card-title">[[PROJECT TITLE]]</h4>
-                  <p class="card-text">[[DESCRIPTION]]</p>
-                  <ul class="tags">
-                    <li class="tag">[[TOOL]]</li>
-                  </ul>
                 </div>
               </article>
             </li>
@@ -317,17 +359,16 @@
         </div>
       </div>
     </section>
+    -->
 
   </main>
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <p>[[FULL NAME]] &mdash; <span data-year>2026</span></p>
+      <p>Colin Duckworth &mdash; <span data-year>2026</span></p>
       <ul class="footer-links">
-        <li><a href="mailto:[[EMAIL]]">Email</a></li>
-        <li><a href="[[LINKEDIN URL]]" target="_blank" rel="noopener">LinkedIn</a></li>
-        <li><a href="[[GITHUB URL]]" target="_blank" rel="noopener">GitHub</a></li>
-        <li><a href="[[SCHOLAR OR ORCID URL]]" target="_blank" rel="noopener">Scholar</a></li>
+        <li><a href="mailto:clduckworth@crimson.ua.edu">Email</a></li>
+        <li><a href="https://www.linkedin.com/in/colin-duckworth/" target="_blank" rel="noopener">LinkedIn</a></li>
       </ul>
     </div>
   </footer>
