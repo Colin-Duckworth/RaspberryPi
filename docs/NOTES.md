@@ -2,7 +2,7 @@
 Purpose: The reasoning here is to just explain the concepts of what I learned to understand the internet and networking in general more deeply.
 
 1. What is a DNS / DNS Server and what role does it serve?
-		DNS stands for Domain Name System, it is a tool that abstracts IP addresses under more readable URLs. For instance, when I want to go
+	DNS stands for Domain Name System, it is a tool that abstracts IP addresses under domain names. For instance, when I want to go
 	to youtube to watch ASMR slime videos, and I type in youtube.com, the DNS converts that link "youtube.com" to an IP address which is just a 
 	sequence of numbers like 142.250.x.xxx that allows routers to forward packets. A DNS Server is the actual location where that DNS tool lives,
 	in the case of the Pi-Hole, we are manipulating the ability to define a DNS server's lookup tables to block advertisements
@@ -36,3 +36,35 @@ Purpose: The reasoning here is to just explain the concepts of what I learned to
 		3. I search google.com on my device
 		4. My device uses the DHCP provided DNS IP address to resolve google.com to an IP address for my device to communicate with and sends to the DHCP designated
 		   gateway IP address.
+		   
+4. What is a port on the Pi (or a computer in general)?
+	A port is not a physical hole in the case or place to plug in a cable, it is a 16 bit identifier included in incoming packets that tells the linux kernel where to
+	direct incoming data. All it is is a tool to identify application destination on a device for data. Ports are bidirectional, when the laptop connects to the pi, 
+	the laptop chooses a random port, and the pi has a designated port (8080 in this case).
+	
+	Two Things naturally result from this:
+		1. Two applications cannot have the same port
+		2. Most ports sit empty
+		
+	A server's port needs to be predictable. Many applications have default ports that we never even have to handle, SSH runs on port 22, websites use port 80 for 
+	HTTP (standard) or 443 for HTTPS (encrypted) traffic. You can use the ss linux command to see socket information (what's listening where). For instance when 
+	you type in the IP of  a websites, your browser actually adds the :80 port out of convention. Ports under 1024 are reserved for well known services so only the 
+	root can claim them. Most of the port numbers are selected out of convention.
+	
+	Programs runing on the pi actually occupy multiple ports. For instance,
+		1. Pi Hole does the work on port 53, and administration happens on port 8080
+		2. Qbittorent does work on port 24950, 8081
+		
+5. Wtf is a firewall? and what's ufw?
+	A firewall is simply a tool used to police traffic coming into a device. In it's simplest form, it evaluates three pieces of information to determine what
+	to do with the incoming data.
+		1. Where is this data coming from: IP address and port?
+		2. Where is this data heading to: IP address and port?
+		3. What connection type does this data want to establish: TCP UDP?
+	
+	Once the firewall has that infomation it can do three Things
+		1. Accept the packet (forwards the packet into the desired destination)
+		2. Drop the packet (basically ignore it)
+		3. Reject the packet (returns a no to sender)
+		
+	UFW stands for uncomplicated firewall, it is the standard firewall package on unbuntu devices.
