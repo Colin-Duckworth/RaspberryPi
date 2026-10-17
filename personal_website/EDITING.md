@@ -68,9 +68,11 @@ You are done when that prints nothing. The ones that are not obvious:
 - **Where files go:** the portrait is `site/images/profile.jpg`; project figures
   are in `site/images/projects/<slug>/`; `site/assets/` is only for the favicon and
   the resume PDF. Use lowercase, hyphenated names.
-- **Portrait photos** (phone shots) are cropped to the 16:10 thumbnail. Give the
-  `<img>` `class="crop-upper"` to keep the top of the photo, where the subject
-  usually is, instead of the centre; the lightbox still shows the whole photo.
+- **Photos** are cropped to the 16:10 thumbnail by default. For a 3:4 portrait
+  that should be shown whole, give the `<img>` `class="portrait"` (the cell
+  becomes tall). For a photo whose edges matter, use `class="fit-contain"`.
+  The gallery is two columns on desktop, so keep figures in pairs (two diagrams,
+  then two portraits) to avoid a lone image leaving blank space beside it.
   Phone photos carry a rotation tag: bake the rotation into the pixels when you
   resize (as the existing ones were), or they show sideways in some viewers.
 - **A figure that only exists as a PDF** (a slide or a figure from a paper) has

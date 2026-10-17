@@ -751,10 +751,9 @@ a.card:hover {
   background: var(--bg);
 }
 
-/* Portrait photos are cropped to the thumbnail ratio; keep the upper part
-   (the subject) instead of the centre. The lightbox shows the whole photo. */
-.gallery-link img.crop-upper {
-  object-position: 50% 30%;
+/* Portrait photos (3:4) are shown whole, tall, instead of cropped to 16:10. */
+.gallery-link img.portrait {
+  aspect-ratio: 3 / 4;
 }
 
 .gallery figcaption {

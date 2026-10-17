@@ -157,6 +157,37 @@ Every sub-project folder has its own `README.md` with the same sections:
 
 ---
 
+## Quick reference
+
+### Services and ports
+
+What is listening on the Pi (`192.168.8.51`), checked with `sudo ss -tulpn`.
+
+| Service | Port | Protocol | Used for |
+|---|---|---|---|
+| SSH (base) | 22 | TCP | Logging in from the laptop |
+| Pi-hole | 53 | TCP + UDP | DNS queries from LAN devices |
+| Pi-hole | 8080 | TCP | Admin web UI: `http://192.168.8.51:8080/admin` |
+| Pi-hole | 8443 | TCP | Admin web UI over HTTPS |
+| Website (nginx) | 80 | TCP | The site over HTTP: `http://192.168.8.51/` |
+| Website (nginx) | 443 | TCP | Reserved for HTTPS; nothing listening until TLS is set up |
+| qBittorrent | 8081 | TCP | Web UI: `http://192.168.8.51:8081` (qBittorrent's default is 8080, which Pi-hole already uses) |
+| qBittorrent | 24950 | TCP + UDP | Incoming connections from torrent peers |
+| qBittorrent | 6771 | UDP | Local peer discovery (finding peers on the LAN) |
+
+### Common commands
+
+A running list of commands I use on the Pi. Append new ones at the bottom.
+
+- `ssh doodlster@192.168.8.51` (from the laptop): log in to the Pi.
+- `lsblk`: storage drives and their partitions, sizes, and mount points.
+- `lsusb`: devices connected over USB.
+- `sudo ss -tulpn`: every port the Pi is listening on (TCP and UDP) and the
+  program holding it. `sudo` is needed to see the program name for services
+  that run as root, like nginx and Pi-hole.
+
+---
+
 ## Getting started
 
 1. Read [`docs/rebuild.md`](docs/rebuild.md) for the full build order.
@@ -170,3 +201,4 @@ Every sub-project folder has its own `README.md` with the same sections:
 - Raspberry Pi documentation: https://www.raspberrypi.com/documentation/
 - Pi-hole documentation: https://docs.pi-hole.net/
 - Man pages on the Pi itself: `man <command>`, `man 5 <config-file>` for file formats
+
