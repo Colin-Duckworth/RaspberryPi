@@ -185,6 +185,10 @@ A running list of commands I use on the Pi. Append new ones at the bottom.
 - `sudo ss -tulpn`: every port the Pi is listening on (TCP and UDP) and the
   program holding it. `sudo` is needed to see the program name for services
   that run as root, like nginx and Pi-hole.
+- `sudo ufw status`: list the firewall rules. Shows which ports are actually
+  let in from outside, and from where (`ss` only shows what is listening).
+- `sudo ufw status numbered`: the same list with a number on each rule, for
+  removing one with `sudo ufw delete <number>`.
 
 ---
 
