@@ -18,7 +18,7 @@ install, the docs and configs here should be enough to rebuild the whole server.
 |---|---|---|---|---|
 | 1 | [`pihole/`](pihole/) | Network-wide ad blocking at the DNS layer | DNS resolution end to end, recursive vs. authoritative servers, caching/TTLs, DHCP, limits of DNS blocking (DoH, hardcoded DNS) | In progress: installed, one device filtered |
 | 2 | [`personal_website/`](personal_website/) | A personal website, self-hosted on the Pi | Web servers, reverse proxies, ports/sockets, HTTP/HTTPS, TLS certificates, DNS records, NAT/port forwarding vs. tunnels, dynamic IPs, internet exposure | In progress: placeholder served on the LAN |
-| 3 | [`media_suite/`](media_suite/) | Local web UI to browse and play movies and games stored on the Pi | Service discovery on the LAN, storage and permissions, streaming vs. transcoding, the Pi's hardware limits, browser playback and emulation | Not started |
+| 3 | [`media_suite/`](media_suite/) | Local web UI to browse and play movies and games stored on the Pi | Service discovery on the LAN, storage and permissions, streaming vs. transcoding, the Pi's hardware limits, browser playback and emulation | In progress: drive mounted, qBittorrent downloading to it; playback not started |
 
 All three sit on top of a shared foundation in [`base/`](base/): OS install,
 SSH, a fixed IP address, updates, users/permissions, and the firewall. That's
@@ -153,7 +153,10 @@ Every sub-project folder has its own `README.md` with the same sections:
   from the repo with `rsync`. Pi-hole's admin UI moved to `:8080` to free ports
   80/443. Not reachable from outside the LAN yet; the CGNAT check and the access
   decision are next. See [`personal_website/README.md`](personal_website/README.md).
-- **media_suite/**: not started (needs the USB drive).
+- **media_suite/**: the USB drive is mounted at `/mnt/media` at boot (exFAT,
+  via `/etc/fstab`), and qBittorrent runs as a service with its web UI on
+  `:8081` (LAN only), downloading to the drive. The playback web UI is next. See
+  [`media_suite/README.md`](media_suite/README.md).
 
 ---
 
@@ -189,6 +192,18 @@ A running list of commands I use on the Pi. Append new ones at the bottom.
   let in from outside, and from where (`ss` only shows what is listening).
 - `sudo ufw status numbered`: the same list with a number on each rule, for
   removing one with `sudo ufw delete <number>`.
+- `curl -LO <url>`: download a file from a website into the current folder,
+  keeping its original name. `-L` follows redirects (download links often
+  bounce to another server first); `-O` saves it under the name in the URL.
+  Use `-o <name>` instead to pick the name. `cd` to where it should go first,
+  e.g. `cd /mnt/media` for anything big.
+- `sha256sum <file>`: fingerprint of a downloaded file. Compare it with the
+  checksum published on the download page; if they differ, the file is
+  corrupted or not the real one.
+- **Install scripts: download, read, then run.** Never pipe a script straight
+  into a shell (`curl ... | sudo bash`). Instead:
+  `curl -sSL <url> -o install.sh`, then `less install.sh`, then
+  `sudo bash install.sh`. Same pattern as the Pi-hole install.
 
 ---
 

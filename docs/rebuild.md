@@ -67,4 +67,22 @@ Prerequisite: Pi-hole's admin UI is off 80/443 (step 2).
 
 ## 4. media_suite/
 
-Not started. Prerequisite: USB HDD attached and mounted (`/mnt/media`).
+Details and troubleshooting: [`media_suite/README.md`](../media_suite/README.md).
+
+Prerequisite: the USB HDD plugged into a blue USB 3 port; Pi-hole's admin UI on 8080 (step 2).
+
+- [ ] `lsblk -f`: note the drive partition's UUID; `id`: note the uid/gid
+- [ ] `sudo mkdir -p /mnt/media`; back up `/etc/fstab`; add the exFAT line with `uid`, `gid`, `umask=022`, `nofail`
+  - Verify: `findmnt --verify` clean, `sudo mount -a` silent, `df -h /mnt/media` shows ~466G
+- [ ] Reboot
+  - Verify: `findmnt /mnt/media` shows the drive; `touch /mnt/media/test` works without `sudo`
+- [ ] Firewall: port 8081 from the LAN
+- [ ] `sudo apt install -y qbittorrent-nox`; `sudo systemctl enable --now qbittorrent-nox@<pi-user>`
+- [ ] Stop the service, set `WebUI\Port=8081` in `~/.config/qBittorrent/qBittorrent.conf`, start it
+- [ ] `sudo systemctl edit qbittorrent-nox@<pi-user>`: `[Unit]` `RequiresMountsFor=/mnt/media`; restart
+  - Verify: `systemctl show -p RequiresMountsFor qbittorrent-nox@<pi-user>` includes `/mnt/media`
+- [ ] Log in with the temporary password from `journalctl`; set a real username and password (password manager, not the repo)
+  - Verify: `http://<pi-ip>:8081` loads from the laptop; `sudo ufw status` has no `Anywhere` rule for 8081
+- [ ] Save paths `/mnt/media/torrents` and `/mnt/media/incomplete_torrents` **before the first download**; seeding limit
+- [ ] Search engine on (View → Search Engine), plugins from trusted sources
+- [ ] Not yet: playback web UI, games (see "Deferred" in the sub-project README)
