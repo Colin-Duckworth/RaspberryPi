@@ -84,5 +84,11 @@ Prerequisite: the USB HDD plugged into a blue USB 3 port; Pi-hole's admin UI on 
 - [ ] Log in with the temporary password from `journalctl`; set a real username and password (password manager, not the repo)
   - Verify: `http://<pi-ip>:8081` loads from the laptop; `sudo ufw status` has no `Anywhere` rule for 8081
 - [ ] Save paths `/mnt/media/torrents` and `/mnt/media/incomplete_torrents` **before the first download**; seeding limit
+- [ ] Categories: `Movies` → `/mnt/media/torrents/movies`, `Series` → `/mnt/media/torrents/series`
 - [ ] Search engine on (View → Search Engine), plugins from trusted sources
-- [ ] Not yet: playback web UI, games (see "Deferred" in the sub-project README)
+- [ ] Firewall: 8096/tcp (and optionally 7359/udp) from the LAN
+- [ ] Jellyfin: download `install-debuntu.sh` and its `.sha256sum`, `sha256sum -c`, read it, `sudo bash install-debuntu.sh`
+  - Verify: `systemctl is-active jellyfin`; `curl -s http://<pi-ip>:8096/health` (laptop) → `Healthy`
+- [ ] Setup wizard; libraries: Movies (type Movies) → `.../movies`, TV Shows (type Shows) → `.../series`, real-time monitoring on
+  - Verify: a film and a series show with the right posters; playback says **Direct playing**
+- [ ] Not yet: games (see "Deferred" in the sub-project README)

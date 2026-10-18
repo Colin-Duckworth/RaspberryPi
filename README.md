@@ -18,7 +18,7 @@ install, the docs and configs here should be enough to rebuild the whole server.
 |---|---|---|---|---|
 | 1 | [`pihole/`](pihole/) | Network-wide ad blocking at the DNS layer | DNS resolution end to end, recursive vs. authoritative servers, caching/TTLs, DHCP, limits of DNS blocking (DoH, hardcoded DNS) | In progress: installed, one device filtered |
 | 2 | [`personal_website/`](personal_website/) | A personal website, self-hosted on the Pi | Web servers, reverse proxies, ports/sockets, HTTP/HTTPS, TLS certificates, DNS records, NAT/port forwarding vs. tunnels, dynamic IPs, internet exposure | In progress: placeholder served on the LAN |
-| 3 | [`media_suite/`](media_suite/) | Local web UI to browse and play movies and games stored on the Pi | Service discovery on the LAN, storage and permissions, streaming vs. transcoding, the Pi's hardware limits, browser playback and emulation | In progress: drive mounted, qBittorrent downloading to it; playback not started |
+| 3 | [`media_suite/`](media_suite/) | Local web UI to browse and play movies and games stored on the Pi | Service discovery on the LAN, storage and permissions, streaming vs. transcoding, the Pi's hardware limits, browser playback and emulation | Working: qBittorrent + search plugins download to the USB drive, Jellyfin plays them on the LAN; games not started |
 
 All three sit on top of a shared foundation in [`base/`](base/): OS install,
 SSH, a fixed IP address, updates, users/permissions, and the firewall. That's
@@ -44,7 +44,8 @@ set up first, because every service depends on it.
          │             ┌───────────────┐
          │  DNS :53 ──►│ Pi-hole       │──► upstream DNS resolver
          │  HTTP/S ───►│ Web server    │◄── (later) internet visitors via port forward or tunnel
-         │  HTTP ─────►│ Media server  │──► USB HDD (/mnt/media)
+         │  HTTP ─────►│ qBittorrent   │──► USB HDD (/mnt/media) ◄── torrent peers (outbound)
+         │  HTTP ─────►│ Jellyfin      │◄── reads the films and shows from the USB HDD
                        └───────────────┘
 ```
 
@@ -153,10 +154,12 @@ Every sub-project folder has its own `README.md` with the same sections:
   from the repo with `rsync`. Pi-hole's admin UI moved to `:8080` to free ports
   80/443. Not reachable from outside the LAN yet; the CGNAT check and the access
   decision are next. See [`personal_website/README.md`](personal_website/README.md).
-- **media_suite/**: the USB drive is mounted at `/mnt/media` at boot (exFAT,
-  via `/etc/fstab`), and qBittorrent runs as a service with its web UI on
-  `:8081` (LAN only), downloading to the drive. The playback web UI is next. See
-  [`media_suite/README.md`](media_suite/README.md).
+- **media_suite/**: **up and running, and working well.** The USB drive is
+  mounted at `/mnt/media` at boot (exFAT, via `/etc/fstab`). qBittorrent
+  (`:8081`) with search plugins downloads into `movies/` or `series/` by
+  category, and Jellyfin (`:8096`) serves both libraries to the LAN. Day-to-day
+  workflow, naming rules and setup are in
+  [`media_suite/README.md`](media_suite/README.md). Games are not started.
 
 ---
 
@@ -177,6 +180,8 @@ What is listening on the Pi (`192.168.8.51`), checked with `sudo ss -tulpn`.
 | qBittorrent | 8081 | TCP | Web UI: `http://192.168.8.51:8081` (qBittorrent's default is 8080, which Pi-hole already uses) |
 | qBittorrent | 24950 | TCP + UDP | Incoming connections from torrent peers |
 | qBittorrent | 6771 | UDP | Local peer discovery (finding peers on the LAN) |
+| Jellyfin | 8096 | TCP | Web UI and streaming: `http://192.168.8.51:8096` |
+| Jellyfin | 7359 | UDP | Lets Jellyfin apps (TV, phone) find the server on the LAN |
 
 ### Common commands
 
