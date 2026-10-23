@@ -209,6 +209,11 @@ A running list of commands I use on the Pi. Append new ones at the bottom.
   into a shell (`curl ... | sudo bash`). Instead:
   `curl -sSL <url> -o install.sh`, then `less install.sh`, then
   `sudo bash install.sh`. Same pattern as the Pi-hole install.
+- `systemctl is-active openvpn-client@cyberghost`: whether the CyberGhost VPN
+  is running (`active`) or not (`inactive`).
+- `curl -s https://ipinfo.io/org`: who the Pi's internet traffic appears to
+  come from. A hosting company (e.g. `M247`) means it is going through the
+  VPN; my ISP's name means it is not.
 
 ---
 

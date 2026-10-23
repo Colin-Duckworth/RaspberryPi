@@ -87,5 +87,8 @@ Purpose: The reasoning here is to just explain the concepts of what I learned to
 	server. Without a VPN, your ISP can see what IP addresses you communicate with, and often DNS queries too, generally not actual content though. With a VPN, your 
 	ISP only sees you communicate with a VPN server. Data being exchanged with the vpn server is encrypted, DNS queries are handled within the VPN server so your 
 	privacy is much more optimized.
+	Technically, a VPN actually contains two parts. The service and the client program. The service is what you pay for, VPN servers around the world to tunnel to.
+	The client program is what connects to one of those servers and sets up the secure tunnel. The client programs are highly standardized and free to download, The
+	most common are OpenVPN and WireGuard.
 	
 	*NOTE: For this to work properly and avoid leaks, the device needs to use the VPN server's DNS, not the ISP's DNS*

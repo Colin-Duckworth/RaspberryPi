@@ -21,5 +21,8 @@ id_*
 *.pem
 *.key
 
+# CyberGhost OpenVPN config, certificates and private key for the Pi's VPN.
+VPN/
+
 # Working files and source documents, never published or committed
 personal_website/source-material/
