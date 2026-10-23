@@ -68,3 +68,24 @@ Purpose: The reasoning here is to just explain the concepts of what I learned to
 		3. Reject the packet (returns a no to sender)
 		
 	UFW stands for uncomplicated firewall, it is the standard firewall package on unbuntu devices.
+	
+6. Ponder putting this all together.
+	Now we have seen how all of these systems interact together so now we can consider the practical development of some tool. I do RF, so let's say for the sake
+	of argument, that I want to create a web accessible platform that monitors the RF spectrum in my house that's accessible from anywhere. Well a hardware toolchain
+	for something like that could be straightforward. 
+		
+		SDR -> Raspberry Pi -> router
+		
+	Now if we consider the software toolchain for such a project it could be achieved by setting the SDR to write it's data to a directory on the PI regularly during
+	operation. Then a simple application could be developed that uses a .py or .sh script to analyze the data written by the SDR and update the HTML setup with nginx.
+	Now this website that displays the spectrum information would be reachable using the nginx port on the PI. This is what it could look like over LAN, to make it
+	accessible anywhere, you'd need to to create a tunnel to the gateway and register the site in DNS.
+	
+7. What is a VPN?
+	VPN stands for Virtual Private Network, simply put, it creates a secure tunnel between your device and the VPN server and uses the server as an intermediatry to 
+	access the broader internet. So in practice, a correctly configured VPN causes the device to only communicate directly through an encrypted tunenel with the VPN 
+	server. Without a VPN, your ISP can see what IP addresses you communicate with, and often DNS queries too, generally not actual content though. With a VPN, your 
+	ISP only sees you communicate with a VPN server. Data being exchanged with the vpn server is encrypted, DNS queries are handled within the VPN server so your 
+	privacy is much more optimized.
+	
+	*NOTE: For this to work properly and avoid leaks, the device needs to use the VPN server's DNS, not the ISP's DNS*
