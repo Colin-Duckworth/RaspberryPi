@@ -42,7 +42,7 @@ Three pieces:
 | **Jellyfin** | |
 | Server | Jellyfin 12.2 (official Debian repository, added by its install script) |
 | Service | `jellyfin`: runs as its own `jellyfin` user, starts at boot |
-| Web UI | `http://<pi-ip>:8096`, LAN only (firewall). Also UDP 7359, which lets apps find the server on the LAN |
+| Web UI | `http://<pi-ip>:8096` on the LAN (firewall), and from anywhere for me and invited friends over [Tailscale](../README.md#remote-access-tailscale). Also UDP 7359, which lets apps find the server on the LAN |
 | Libraries | **Movies** (content type Movies) → `/mnt/media/torrents/movies`; **TV Shows** (content type Shows) → `/mnt/media/torrents/series` |
 | Its own data | `/var/lib/jellyfin` (database, artwork) and `/var/cache/jellyfin`, on the **SD card**, not the drive |
 
@@ -467,10 +467,10 @@ passwords), qBittorrent's own log in `~/.local/share/qBittorrent/logs/`,
 ## Deferred
 
 - **Games:** browser-based emulation (the last part of the original plan).
-- **Watching from outside the home:** Jellyfin is LAN-only. Reaching it from
-  elsewhere is the same question as the website's (CGNAT, tunnel or
-  remote-access VPN such as Tailscale); see
-  [`personal_website/`](../personal_website/README.md#deferred).
+- ~~**Watching from outside the home**~~ (done 2026-10-25): Jellyfin is still
+  closed to the public internet, but I and invited friends reach it through
+  Tailscale, with friends limited to port 8096. See
+  [Remote access: Tailscale](../README.md#remote-access-tailscale).
 - **Automating the rename step** in the day-to-day workflow.
 - **A VPN for torrent traffic** (looked at 2026-10-18, put off). It would change
   routing for the whole Pi, and the Pi's public IPv6 addresses would leak around
